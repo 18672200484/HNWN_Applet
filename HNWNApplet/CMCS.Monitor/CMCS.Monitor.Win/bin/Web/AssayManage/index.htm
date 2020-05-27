@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Untitled Page</title>
+    <script type="text/javascript" src="../Resources/plugins/jquery/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="../Resources/plugins/svg/svg.js"></script>
+    <script type="text/javascript" src="../Resources/js/svgHelper.js"></script>
+    <script type="text/javascript">
+
+        $(function ($) {
+
+        });
+
+        // 获取SVG jquery对象
+        function getSVGjQuery(id) {
+            return $(document.getElementById(id).getSVGDocument())
+        }
+
+        // 获取 svgCanvas1 SVG jquery对象
+        function getCanvas1() {
+            return getSVGjQuery("svgCanvas1");
+        }
+
+        function StartTwinkle() {
+            alert(example.getDateTime());
+        }
+
+        function StartTwinkle2() {
+            alert(example.showConform("确定要删除？"));
+        }
+
+        // 请求数据 - 后台调用
+        function requestData(datas) {
+            for (var i = 0; i < datas.length; i++) {
+                dataHandler(datas[i]);
+            }
+        }
+
+        var angle = 1;
+        // 处理数据
+        function dataHandler(data) {
+            try {
+                // key_value
+                if (data.Type == 0)
+                    $("#" + data.Key).html(data.Value);
+                // json_data
+                else if (data.Type == 1) {
+
+                }
+                // svg_text
+                else if (data.Type == 2) {
+                    getCanvas1().find("*[inkscape\\:label=" + data.Key + "]").html(data.Value);
+                }
+                // svg_color
+                else if (data.Type == 3) {
+                    changeColor1(getCanvas1().find("*[inkscape\\:label=" + data.Key + "]"), data.Value);
+                }
+                // svg_visible
+                else if (data.Type == 4) {
+                    if (data.Value.toLowerCase() == "true")
+                        getCanvas1().find("*[inkscape\\:label=" + data.Key + "]").show();
+                    else
+                        getCanvas1().find("*[inkscape\\:label=" + data.Key + "]").hide();
+                }
+                // svg_width
+                else if (data.Type == 5) {
+                    changeWidth(getCanvas1().find("*[inkscape\\:label=" + data.Key + "]"), data.Value * 388.85 / 50);
+                }
+            } catch (e) {
+                //alert(e.Message);
+            }
+        }
+
+        // 测试 改变数据
+        function test1() {
+            dataHandler({ Key: "制样机1_制样方式", Type: "2", Value: "170111098" });
+        }
+
+        // 测试 改变颜色
+        function testColor() {
+
+            //            dataHandler({ Key: "采样机1_运行模式_远程", Type: "3", Value: "Red" });
+            //            dataHandler({ Key: "采样机1_运行模式_就地", Type: "3", Value: "Red" });
+            //            dataHandler({ Key: "采样机1_程序状态", Type: "3", Value: "Red" });
+            //            dataHandler({ Key: "采样机1_设备状态", Type: "3", Value: "Red" });
+
+            //            dataHandler({ Key: "采样机1_汽车", Type: "4", Value: "false" });
+
+
+            dataHandler({ Key: "化验完成_Line", Type: "5", Value: 100 });
+        }
+
+    </script>
+    <style type="text/css">
+        html, body
+        {
+            margin: 0px;
+            padding: 0px;
+            font-family: 微软雅黑;
+            background-color: rgb(43, 47, 51);
+        }
+        .div-inbarrel-arrow
+        {
+            position: absolute;
+            top: -8px;
+            left: 6px;
+            width: 0px;
+            height: 0px;
+            border-top: solid 10px red;
+            border-bottom: solid 10px transparent;
+            border-left: solid 10px transparent;
+            border-right: solid 10px transparent;
+        }
+        .div-root
+        {
+            position: relative;
+            margin: 0px auto;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .fontColor
+        {
+            color: #EBEBF2;
+            font-size: 10px;
+        }
+        .button1
+        {
+            position: absolute;
+            width: 86px;
+            height: 23px;
+            font-family: 微软雅黑;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        .button1:hover
+        {
+            background-color: #00CED1;
+            border-color: #00CED1;
+            color: White;
+        }
+    </style>
+</head>
+<body onselectstart="return false;">
+    <div class="div-root">
+        <div class="div-root" id="divCanvas">
+            <embed id="svgCanvas1" src="Resources/AssayManage.svg" type="image/svg+xml" />
+        </div>
+    </div>
+</body>
+</html>

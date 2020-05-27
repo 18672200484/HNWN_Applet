@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Untitled Page</title>
+    <script type="text/javascript" src="../Resources/plugins/jquery/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="../Resources/plugins/svg/svg.js"></script>
+    <script type="text/javascript" src="../Resources/js/svgHelper.js"></script>
+    <script type="text/javascript">
+
+        var canvas1;
+        // 阻止右键菜单
+        document.oncontextmenu = function () { return false; };
+
+        window.onload = function () {
+            canvas1 = getCanvas1();
+            // 注册SVG元素脚本事件
+            initSvgElementEvent();
+        };
+
+        // 获取 svgCanvas1 SVG jquery对象
+        function getCanvas1() {
+            return getSVGjQuery("svgCanvas1");
+        }
+
+        // 注册SVG元素脚本事件
+        function initSvgElementEvent() {
+
+            canvas1.find("*[inkscape\\:label=点二单选]").each(function () {
+                $(this).css("cursor", "pointer");
+                $(this).bind("click", function () {
+                    changeColorFill(canvas1.find("*[inkscape\\:label=点二单选_内]"), "#00A551");
+                    changeColorFill(canvas1.find("*[inkscape\\:label=原煤单选_内],*[inkscape\\:label=仲裁单选_内]"), "#404041");
+                    // 选中存样柜
+                    SampleStorageV8Cef.ChangeSelected("0.2mm");
+                });
+            });
+            canvas1.find("*[inkscape\\:label=原煤单选]").each(function () {
+                $(this).css("cursor", "pointer");
+                $(this).bind("click", function () {
+                    changeColorFill(canvas1.find("*[inkscape\\:label=原煤单选_内]"), "#00A551");
+                    changeColorFill(canvas1.find("*[inkscape\\:label=点二单选_内],*[inkscape\\:label=仲裁单选_内]"), "#404041");
+                    // 选中存样柜
+                    SampleStorageV8Cef.ChangeSelected("原煤");
+                });
+            });
+            canvas1.find("*[inkscape\\:label=仲裁单选]").each(function () {
+                $(this).css("cursor", "pointer");
+                $(this).bind("click", function () {
+                    changeColorFill(canvas1.find("*[inkscape\\:label=仲裁单选_内]"), "#00A551");
+                    changeColorFill(canvas1.find("*[inkscape\\:label=点二单选_内],*[inkscape\\:label=原煤单选_内]"), "#404041");
+                    // 选中存样柜
+                    SampleStorageV8Cef.ChangeSelected("仲裁");
+                });
+            });
+
+            reloadBox();
+        }
+
+        // 改变颜色
+        // $element:SVG.jQuery对象
+        // color:颜色
+        function changeColorFill($elements, color) {
+            $elements.each(function () {
+                var $this = $(this);
+                $this.css({ "fill": color });
+            });
+        }
+
+
+        function reloadBox(cellDatas) {
+            var temp = "";
+            var height = 590;
+            var width = 1130;
+            //柜子的高度和快读动态变化
+            var cellHeight = 30;
+            if (cellDatas.length > 0)
+                cellHeight = height / cellDatas.length;
+            cellHeight = ((cellHeight - 10) > 0 ? (cellHeight - 10) : 30);
+            for (var j = 0; j < cellDatas.length; j++) {
+                var rowName = cellDatas[j].RowName;
+                temp += "<div style='position: absolute;width: 100px; height: " + cellHeight + "px;line-height: " + cellHeight + "px;left:10px;top:" + ((cellHeight * j) + 10 * (j + 1)) + "px; background-color: white;text-align:center;font-weight:bold;'>" + rowName + "</div>";
+                var cellList = cellDatas[j].CellList;
+                var cellWidth = 40;
+                if (cellList.length > 0)
+                    cellWidth = width / cellList.length;
+                cellWidth = ((cellWidth - 10) > 0 ? (cellWidth - 10) : 40);
+                for (var i = 0; i < cellList.length; i++) {
+                    var color = "rgba(0, 0, 0, 0)";
+                    if (cellList[i].CellFlag == "0")
+                        color = "#A6A8AB";
+                    else if (cellList[i].CellFlag == "1")
+                        color = "#449AEA";
+                    else if (cellList[i].CellFlag == "2")
+                        color = "#EF7E3C";
+                    else if (cellList[i].CellFlag == "3")
+                        color = "#FF002B";
+                    temp += "<div style='position: absolute;width: " + cellWidth + "px; height: " + cellHeight + "px;line-height: " + cellHeight + "px;left:" + (cellWidth * i + 100 + (10 * (i + 1))) + "px;top:" + (cellHeight * j + 10 * (j + 1)) + "px; background-color:" + color + ";text-align:center;color:white;'>" + cellList[i].CellCode + "</div>";
+                }
+            }
+            $("#sambox").html(temp);
+        }
+
+
+        // 请求数据 - 后台调用
+        function requestData(datas) {
+            for (var i = 0; i < datas.length; i++) {
+                dataHandler(datas[i]);
+            }
+        }
+
+        // 处理数据
+        function dataHandler(data) {
+            // key_value
+            if (data.Type == 0)
+                $("#" + data.Key).html(data.Value);
+            // json_data
+            else if (data.Type == 1) {
+                if (data.Key == "样柜信息") {
+                    reloadBox(jQuery.parseJSON(data.Value));
+                }
+            }
+            // svg_text
+            else if (data.Type == 2) {
+                canvas1.find("*[inkscape\\:label=" + data.Key + "]").html(data.Value);
+            }
+            // svg_color
+            else if (data.Type == 3) {
+                changeColor1(canvas1.find("*[inkscape\\:label=" + data.Key + "]"), data.Value);
+            }
+        }
+
+        // 测试
+        function test1() {
+
+        } 
+     
+    </script>
+    <style type="text/css">
+        html, body
+        {
+            margin: 0px;
+            padding: 0px;
+            font-family: 微软雅黑;
+            background-color: rgb(43, 47, 51);
+        }
+        .div-root
+        {
+            position: relative;
+            margin: 0px auto;
+            width: 100%;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body onselectstart="return false;" oncontextmenu="return false;">
+    <div class="div-root">
+        <div id="sambox" style="width: 1270px; height: 610px; position: absolute; top: 256px;
+            left: 322px; background-color: #F6F6F6;">
+        </div>
+        <embed id="svgCanvas1" src="Resources/SampleStorage.svg" type="image/svg+xml" />
+    </div>
+</body>
+</html>

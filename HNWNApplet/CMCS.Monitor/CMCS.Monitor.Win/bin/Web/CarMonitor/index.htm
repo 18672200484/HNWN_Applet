@@ -1,0 +1,665 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Untitled Page</title>
+    <script type="text/javascript" src="../Resources/plugins/jquery/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="../Resources/plugins/layer/layer.min.js"></script>
+    <script type="text/javascript">
+
+        // 请求数据 - 后台调用
+        function requestData(datas) {
+            for (var i = 0; i < datas.length; i++) {
+                dataHandler(datas[i]);
+            }
+        }
+
+        // 处理数据
+        function dataHandler(data) {
+            // key_value
+            if (data.Type == 0)
+                $("#" + data.Key).html(data.Value);
+            // json_data
+            else if (data.Type == 1) {
+                setStatus(data);
+            }
+            // svg_text
+            else if (data.Type == 2) {
+
+            }
+            // svg_color
+            else if (data.Type == 3) {
+
+            }
+        }
+
+        function setStatus(data) {
+            var key = eval(data.Key),
+                value = eval(data.Value);
+            if (value == "0") {
+                $("#" + data.Key).attr("src", "Resources/images/Light_red.png");
+            }
+            else if (value == "1") {
+                $("#" + data.Key).attr("src", "Resources/images/Light_green.png");
+            }
+            else {
+                //$("#" + data.Key).attr("src", "Resources/images/灰色灯.png");
+            }
+        }
+
+        //发送控制指令
+        function SendCmd(parm) {
+            CarMonitorV8Cef.SendCmd(parm);
+        }
+
+        //翻转箭头闪烁
+        function animateImg(data) {
+            setInterval(function () {
+                var imgvalue = eval(data.Value),
+             $img = $("#" + data.Key);
+                if (imgvalue == "1") {
+                    $img.animate({ opacity: 0.3 }, 1000);
+                    $img.animate({ opacity: 1 }, 1000);
+                }
+            });
+        }
+    </script>
+    <style type="text/css">
+        html, body
+        {
+            margin: 0px;
+            font-family: 微软雅黑;
+            background-color: rgb(43, 47, 51);
+        }
+        
+        .divMain
+        {
+            width: 100%;
+            height: 960px;
+            overflow: auto;
+        }
+        
+        .divContent
+        {
+            position: relative;
+            text-align: center;
+            width: 90%;
+            height: 94px;
+            margin: 45px auto;
+        }
+        
+        .table
+        {
+            width: 100%;
+            height: 100%;
+            border-collapse: collapse;
+            border: 1px solid #5C6065;
+        }
+        
+        .table td
+        {
+            border: 1px solid #5C6065;
+        }
+        
+        .trTitle
+        {
+            background-color: #2C3E48;
+            text-align: center;
+            line-height: 40px;
+        }
+        
+        .labelHead
+        {
+            font-weight: bold;
+            font-size: 20px;
+            color: White;
+        }
+        
+        .labelContent
+        {
+            font-size: 20px;
+            color: White;
+        }
+        .imgBtn
+        {
+            padding: 4px 8px 0px 8px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body onload="" style="overflow: hidden;">
+    <form action="">
+    <div class="divMain">
+        <!--入厂排队-->
+        <div id="id1" class="divContent">
+            <table class="table">
+                <tr class="trTitle">
+                    <td rowspan="2" style="width: 175px;">
+                        <img alt="" src="Resources/images/OutInfactory_ico.png" /><br />
+                        <label class="labelHead">
+                            入厂排队</label>
+                    </td>
+                    <td style="width: 175px; height: 50%">
+                        <label class="labelContent">
+                            程序状态</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            IO控制器</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            LED1屏</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            LED2屏</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            读卡器</label>
+                    </td>
+                    <td style="width: 520px;">
+                        <label class="labelContent">
+                            升降杆</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img id="Infactory_State1" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Infactory_State2" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Infactory_State3" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Infactory_State4" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Infactory_State5" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <!--<input class="imgBtn" type="button" style="width: 85px; height: 28px; margin:0px;   background-image:url(Resources/images/Up_btn.png)" />-->
+                        <img class="imgBtn" alt="" onclick="SendCmd('Infactory_Up1')" src="Resources/images/Up_btn.png" />
+                        <img class="imgBtn" alt="" onclick="SendCmd('Infactory_Down1')" src="Resources/images/Down_btn.png" />
+                        <img class="imgBtn" alt="" onclick="SendCmd('Infactory_Up2')" src="Resources/images/Up_btn.png" />
+                        <img class="imgBtn" alt="" onclick="SendCmd('Infactory_Down2')" src="Resources/images/Down_btn.png" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!--#1汽车采样机-->
+        <div id="id2" class="divContent">
+            <table class="table">
+                <tr class="trTitle">
+                    <td rowspan="2" style="width: 175px;">
+                        <img alt="" src="Resources/images/Sampler_ico.png" /><br />
+                        <label class="labelHead">
+                            #1汽车采样机</label>
+                    </td>
+                    <td style="width: 175px; height: 50%">
+                        <label class="labelContent">
+                            程序状态</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            IO控制器</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            LED1屏</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            LED2屏</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            读卡器</label>
+                    </td>
+                    <td style="width: 520px;">
+                        <label class="labelContent">
+                            升降杆</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img id="Sample1_State1" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Sample1_State2" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Sample1_State3" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Sample1_State4" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Sample1_State5" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img class="imgBtn" alt="" onclick="SendCmd('Sample1_Up1')" src="Resources/images/Up_btn.png" />
+                        <img class="imgBtn" alt="" onclick="SendCmd('Sample1_Down1')" src="Resources/images/Down_btn.png" />
+                        <img class="imgBtn" alt="" onclick="SendCmd('Sample1_Up2')" src="Resources/images/Up_btn.png" />
+                        <img class="imgBtn" alt="" onclick="SendCmd('Sample1_Down2')" src="Resources/images/Down_btn.png" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!--#2汽车采样机-->
+        <div id="id3" class="divContent">
+            <table class="table">
+                <tr class="trTitle">
+                    <td rowspan="2" style="width: 175px;">
+                        <img alt="" src="Resources/images/Sampler_ico.png" /><br />
+                        <label class="labelHead">
+                            #2汽车采样机</label>
+                    </td>
+                    <td style="width: 175px; height: 50%">
+                        <label class="labelContent">
+                            程序状态</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            IO控制器</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            LED1屏</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            LED2屏</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            读卡器</label>
+                    </td>
+                    <td style="width: 520px;">
+                        <label class="labelContent">
+                            升降杆</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img id="Sample2_State1" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Sample2_State2" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Sample2_State3" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Sample2_State4" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Sample2_State5" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img class="imgBtn" alt="" onclick="SendCmd('Sample2_Up1')" src="Resources/images/Up_btn.png" />
+                        <img class="imgBtn" alt="" onclick="SendCmd('Sample2_Down1')" src="Resources/images/Down_btn.png" />
+                        <img class="imgBtn" alt="" onclick="SendCmd('Sample2_Up2')" src="Resources/images/Up_btn.png" />
+                        <img class="imgBtn" alt="" onclick="SendCmd('Sample2_Down2')" src="Resources/images/Down_btn.png" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!--#3汽车采样机-->
+        <div id="Div9" class="divContent">
+            <table class="table">
+                <tr class="trTitle">
+                    <td rowspan="2" style="width: 175px;">
+                        <img alt="" src="Resources/images/Sampler_ico.png" /><br />
+                        <label class="labelHead">
+                            #3汽车采样机</label>
+                    </td>
+                    <td style="width: 175px; height: 50%">
+                        <label class="labelContent">
+                            程序状态</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            IO控制器</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            LED1屏</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            LED2屏</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            读卡器</label>
+                    </td>
+                    <td style="width: 520px;">
+                        <label class="labelContent">
+                            升降杆</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img id="Sample3_State1" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Sample3_State2" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Sample3_State3" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Sample3_State4" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Sample3_State5" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img class="imgBtn" alt="" onclick="SendCmd('Sample3_Up1')" src="Resources/images/Up_btn.png" />
+                        <img class="imgBtn" alt="" onclick="SendCmd('Sample3_Down1')" src="Resources/images/Down_btn.png" />
+                        <img class="imgBtn" alt="" onclick="SendCmd('Sample3_Up2')" src="Resources/images/Up_btn.png" />
+                        <img class="imgBtn" alt="" onclick="SendCmd('Sample3_Down2')" src="Resources/images/Down_btn.png" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!--#1汽车衡-->
+        <div id="Div1" class="divContent">
+            <table class="table">
+                <tr class="trTitle">
+                    <td rowspan="2" style="width: 175px;">
+                        <img alt="" src="Resources/images/Weighter_ico.png" /><br />
+                        <label class="labelHead">
+                            #1汽车衡</label>
+                    </td>
+                    <td style="width: 175px; height: 50%">
+                        <label class="labelContent">
+                            程序状态</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            IO控制器</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            LED1屏</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            LED2屏</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            读卡器</label>
+                    </td>
+                    <td style="width: 520px;">
+                        <label class="labelContent">
+                            升降杆</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img id="Weighter1_State1" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Weighter1_State2" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Weighter1_State3" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Weighter1_State4" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Weighter1_State5" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img class="imgBtn" alt="" onclick="SendCmd('Weighter1_Up1')" src="Resources/images/Up_btn.png" />
+                        <img class="imgBtn" alt="" onclick="SendCmd('Weighter1_Down1')" src="Resources/images/Down_btn.png" />
+                        <img class="imgBtn" alt="" onclick="SendCmd('Weighter1_Up2')" src="Resources/images/Up_btn.png" />
+                        <img class="imgBtn" alt="" onclick="SendCmd('Weighter1_Down2')" src="Resources/images/Down_btn.png" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!--#2汽车衡-->
+        <div id="Div2" class="divContent">
+            <table class="table">
+                <tr class="trTitle">
+                    <td rowspan="2" style="width: 175px;">
+                        <img alt="" src="Resources/images/Weighter_ico.png" /><br />
+                        <label class="labelHead">
+                            #2汽车衡</label>
+                    </td>
+                    <td style="width: 175px; height: 50%">
+                        <label class="labelContent">
+                            程序状态</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            IO控制器</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            LED1屏</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            LED2屏</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            读卡器</label>
+                    </td>
+                    <td style="width: 520px;">
+                        <label class="labelContent">
+                            升降杆</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img id="Weighter2_State1" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Weighter2_State2" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Weighter2_State3" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Weighter2_State4" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Weighter2_State5" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img class="imgBtn" alt="" onclick="SendCmd('Weighter2_Up1')" src="Resources/images/Up_btn.png" />
+                        <img class="imgBtn" alt="" onclick="SendCmd('Weighter2_Down1')" src="Resources/images/Down_btn.png" />
+                        <img class="imgBtn" alt="" onclick="SendCmd('Weighter2_Up2')" src="Resources/images/Up_btn.png" />
+                        <img class="imgBtn" alt="" onclick="SendCmd('Weighter2_Down2')" src="Resources/images/Down_btn.png" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!--#3汽车衡-->
+        <div id="Div3" class="divContent">
+            <table class="table">
+                <tr class="trTitle">
+                    <td rowspan="2" style="width: 175px;">
+                        <img alt="" src="Resources/images/Weighter_ico.png" /><br />
+                        <label class="labelHead">
+                            #3汽车衡</label>
+                    </td>
+                    <td style="width: 175px; height: 50%">
+                        <label class="labelContent">
+                            程序状态</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            IO控制器</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            LED1屏</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            LED2屏</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            读卡器</label>
+                    </td>
+                    <td style="width: 520px;">
+                        <label class="labelContent">
+                            升降杆</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img id="Weighter3_State1" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Weighter3_State2" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Weighter3_State3" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Weighter3_State4" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Weighter3_State5" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img class="imgBtn" alt="" onclick="SendCmd('Weighter3_Up1')" src="Resources/images/Up_btn.png" />
+                        <img class="imgBtn" alt="" onclick="SendCmd('Weighter3_Down1')" src="Resources/images/Down_btn.png" />
+                        <img class="imgBtn" alt="" onclick="SendCmd('Weighter3_Up2')" src="Resources/images/Up_btn.png" />
+                        <img class="imgBtn" alt="" onclick="SendCmd('Weighter3_Down2')" src="Resources/images/Down_btn.png" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!--#4汽车衡-->
+        <div id="Div4" class="divContent">
+            <table class="table">
+                <tr class="trTitle">
+                    <td rowspan="2" style="width: 175px;">
+                        <img alt="" src="Resources/images/Weighter_ico.png" /><br />
+                        <label class="labelHead">
+                            #4汽车衡</label>
+                    </td>
+                    <td style="width: 175px; height: 50%">
+                        <label class="labelContent">
+                            程序状态</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            IO控制器</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            LED1屏</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            LED2屏</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            读卡器</label>
+                    </td>
+                    <td style="width: 520px;">
+                        <label class="labelContent">
+                            升降杆</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img id="Weighter4_State1" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Weighter4_State2" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Weighter4_State3" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Weighter4_State4" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Weighter4_State5" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img class="imgBtn" alt="" onclick="SendCmd('Weighter4_Up1')" src="Resources/images/Up_btn.png" />
+                        <img class="imgBtn" alt="" onclick="SendCmd('Weighter4_Down1')" src="Resources/images/Down_btn.png" />
+                        <img class="imgBtn" alt="" onclick="SendCmd('Weighter4_Up2')" src="Resources/images/Up_btn.png" />
+                        <img class="imgBtn" alt="" onclick="SendCmd('Weighter4_Down2')" src="Resources/images/Down_btn.png" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!--出厂排队-->
+        <div id="Div10" class="divContent">
+            <table class="table">
+                <tr class="trTitle">
+                    <td rowspan="2" style="width: 175px;">
+                        <img alt="" src="Resources/images/OutInfactory_ico.png" /><br />
+                        <label class="labelHead">
+                            出厂排队</label>
+                    </td>
+                    <td style="width: 175px; height: 50%">
+                        <label class="labelContent">
+                            程序状态</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            IO控制器</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            LED1屏</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            LED2屏</label>
+                    </td>
+                    <td style="width: 175px;">
+                        <label class="labelContent">
+                            读卡器</label>
+                    </td>
+                    <td style="width: 520px;">
+                        <label class="labelContent">
+                            升降杆</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img id="Outfactory_State1" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Outfactory_State2" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Outfactory_State3" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Outfactory_State4" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img id="Outfactory_State5" alt="" src="Resources/images/Light_green.png" />
+                    </td>
+                    <td>
+                        <img class="imgBtn" alt="" onclick="SendCmd('Outfactory_Up1')" src="Resources/images/Up_btn.png" />
+                        <img class="imgBtn" alt="" onclick="SendCmd('Outfactory_Down1')" src="Resources/images/Down_btn.png" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    </form>
+</body>
+</html>

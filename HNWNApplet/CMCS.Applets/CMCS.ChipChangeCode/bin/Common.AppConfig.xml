@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ThisAppConfig>
+  <!--读卡器Ip地址-->
+  <HFReaderIP>192.168.1.190</HFReaderIP>
+  <!--读卡器端口号-->
+  <HFReaderPort>6000</HFReaderPort>
+</ThisAppConfig>
+

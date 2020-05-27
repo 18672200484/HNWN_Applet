@@ -1,0 +1,291 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Untitled Page</title>
+    <script type="text/javascript" src="../Resources/plugins/jquery/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="../Resources/plugins/layer/layer.min.js"></script>
+    <script type="text/javascript" src="../Resources/plugins/svg/svg.js"></script>
+    <script type="text/javascript" src="../Resources/js/svgHelper.js"></script>
+    <script type="text/javascript">
+
+        // 旋转
+        var canvas1;
+
+        window.onload = function () {
+            canvas1 = getCanvas1();
+
+            $("#Radio1").bind("click", function () {
+                var res = AutoMakerV8Cef.OpenAutoMaker("#1全自动制样机");
+            });
+            $("#Radio2").bind("click", function () {
+                var res = AutoMakerV8Cef.OpenAutoMaker("#2全自动制样机");
+            });
+            $("#Radio3").bind("click", function () {
+                var res = AutoMakerV8Cef.OpenAutoMaker("#3全自动制样机");
+            });
+        };
+
+        var keys = "";
+        var i = 0;
+        var j = 0;
+        $(function ($) {
+        });
+
+        // 获取SVG jquery对象
+        function getSVGjQuery(id) {
+            return $(document.getElementById(id).getSVGDocument())
+        }
+
+        // 获取 svgCanvas1 SVG jquery对象
+        function getCanvas1() {
+            return getSVGjQuery("svgCanvas1");
+        }
+
+        // 请求数据 - 后台调用
+        function requestData(datas) {
+            for (var i = 0; i < datas.length; i++) {
+                dataHandler(datas[i]);
+            }
+        }
+
+        var angle = 1;
+        // 处理数据
+        function dataHandler(data) {
+
+            if (data.Key == "全自动制样机") {
+                if (data.Value == "#1全自动制样机") {
+                    $("#Radio1").attr("checked", "checked");
+                    getCanvas1().find("*[inkscape\\:label=BM]").html("1");
+                }
+                else if (data.Value == "#2全自动制样机") {
+                    $("#Radio2").attr("checked", "checked");
+                    getCanvas1().find("*[inkscape\\:label=BM]").html("2");
+                }
+                else if (data.Value == "#3全自动制样机") {
+                    $("#Radio3").attr("checked", "checked");
+                    getCanvas1().find("*[inkscape\\:label=BM]").html("3");
+                }
+                zjy = data.Value;
+            }
+
+            if (data.Key.toString().indexOf(zjy) >= 0) {
+
+                data.Key = data.Key.toString().replace("#1全自动制样机", "").replace("#2全自动制样机", "").replace("#3全自动制样机", "");
+                try {
+                    // key_value
+                    if (data.Type == 0)
+                        $("#" + data.Key).html(data.Value);
+                    // json_data
+                    else if (data.Type == 1) {
+                        if (data.Key == "采样机1_集样罐" || data.Key == "采样机2_集样罐") loadBarrels(data);
+                    }
+                    // svg_text
+                    else if (data.Type == 2) {
+                        getCanvas1().find("*[inkscape\\:label=" + data.Key + "]").html(data.Value);
+                    }
+                    // svg_color
+                    else if (data.Type == 3) {
+                        if (data.Key.indexOf("stroke") > 0) {
+                            svgChangeColor2(canvas1.find("*[inkscape\\:label=" + data.Key + "]"), data.Value);
+                        }
+                        else {
+                            svgChangeColor1(canvas1.find("*[inkscape\\:label=" + data.Key + "]"), data.Value);
+                        }
+                    }
+                    // svg_visible
+                    else if (data.Type == 4) {
+                        if (data.Value.toLowerCase() == "true") {
+                            canvas1.find("*[inkscape\\:label=" + data.Key + "]").show();
+                        }
+                        else {
+                            canvas1.find("*[inkscape\\:label=" + data.Key + "]").hide();
+                        }
+                    }
+                    else if (data.Type = 9999) {
+                        keys = data.Value;
+                    }
+                } catch (e) {
+                    //alert(e.Message);
+                }
+            } else {
+                if (data.Type == 2) {
+                    getCanvas1().find("*[inkscape\\:label=" + data.Key + "]").html(data.Value);
+                }
+                // svg_color
+                else if (data.Type == 3) {
+                    svgChangeColor1(canvas1.find("*[inkscape\\:label=" + data.Key + "]"), data.Value);
+                   
+                }
+            }
+        }
+
+        //测试皮带
+        function testColor() {
+            
+            svgChangeColor2(canvas1.find("*[inkscape\\:label=三毫米存查样输送皮带stroke]"), "#ff0000");
+        }
+
+        window.setInterval(function () {
+            if (keys.indexOf("圆盘给料机正转") >= 0)
+                $("#圆盘给料机").css("transform", "rotate(" + j + "deg)");
+            if (keys.indexOf("圆盘给料机反转") >= 0)
+                $("#圆盘给料机").css("transform", "rotate(" + i + "deg)");
+
+            if (keys.indexOf("锤破电机") >= 0)
+                $("#锤破电机").css("transform", "rotate(" + j + "deg)");
+            if (keys.indexOf("旋转刮料电机") >= 0)
+                $("#旋转刮料电机").css("transform", "rotate(" + j + "deg)");
+            if (keys.indexOf("六毫米圆盘缩分器") >= 0)
+                $("#六毫米圆盘缩分器").css("transform", "rotate(" + j + "deg)");
+
+            if (keys.indexOf("对辊破碎机") >= 0)
+                $("#对辊破碎机").css("transform", "rotate(" + j + "deg)");
+            if (keys.indexOf("三毫米圆盘缩分器") >= 0)
+                $("#三毫米圆盘缩分器").css("transform", "rotate(" + j + "deg)");
+            if (keys.indexOf("三毫米二分振动器") >= 0)
+                $("#三毫米二分振动器").css("transform", "rotate(" + j + "deg)");
+
+            if (keys.indexOf("粉碎机") >= 0)
+                $("#粉碎机").css("transform", "rotate(" + j + "deg)");
+            if (keys.indexOf("零毫米二分振动器") >= 0)
+                $("#零毫米二分振动器").css("transform", "rotate(" + j + "deg)");
+
+            i += 120;
+            if (i >= 360)
+                i = 0;
+
+            j -= 120;
+            if (j <= 0)
+                j = 360;
+
+        }, 100);
+
+    </script>
+    <style type="text/css">
+        html, body
+        {
+            margin: 0px;
+            padding: 0px;
+            font-family: 微软雅黑;
+            background-color: rgb(43, 47, 51);
+        }
+        
+        .div-root
+        {
+            position: relative;
+            margin: 0px auto;
+            width: 100%;
+            overflow: hidden;
+            text-align: center;
+        }
+        .divMain
+        {
+            position: absolute;
+            top: 100px;
+            left: 720px;
+            width: 922px;
+            height: 169px;
+            overflow: hidden;
+            border: 1px solid #5C6065;
+        }
+        .button1
+        {
+            position: absolute;
+            width: 86px;
+            height: 23px;
+            font-family: 微软雅黑;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        .button1:hover
+        {
+            background-color: #00CED1;
+            border-color: #00CED1;
+            color: White;
+        }
+        
+        /*异常table样式*/
+        .table
+        {
+            border-collapse: collapse;
+            border: 1px solid #5C6065;
+            width: 100%;
+        }
+        
+        .table td
+        {
+            border: 1px solid #5C6065;
+        }
+        
+        .trTitle
+        {
+            background-color: #2C3E48;
+            text-align: center;
+            font-size: 20px;
+            color: White;
+            height: 42px;
+        }
+        .trContent
+        {
+            text-align: center;
+            height: 42px;
+        }
+        
+        /*出样table样式*/
+        .SampleTable
+        {
+            border-collapse: collapse;
+            border: 1px solid #5C6065;
+            width: 100%;
+        }
+        .SampleTable td
+        {
+            border: 1px solid #5C6065;
+        }
+        
+        .trSampleTitle
+        {
+            background-color: #2C3E48;
+            text-align: center;
+            font-size: 17px;
+            font-family: 微软雅黑;
+            color: White;
+            height: 42px;
+        }
+        .trSampleContent
+        {
+            text-align: center;
+            height: 42px;
+            color: White;
+        }
+    </style>
+</head>
+<body onselectstart="return false;">
+    <div class="div-root" id="divCanvas">
+
+        <embed id="svgCanvas1" src="Resources/AutoMaker.svg" type="image/svg+xml" />
+
+        <img id="圆盘给料机" src="Resources/images/g3886.png" style="position: absolute; top: 147px;
+            left: 341px; width: 44px; height: 44px;" />
+        <img id="锤破电机" src="Resources/images/g3886.png" style="position: absolute; top: 318px;
+            left: 310px; width: 44px; height: 44px;" />
+        <img id="旋转刮料电机" src="Resources/images/g3886.png" style="position: absolute; top: 502px;
+            left: 310px; width: 44px; height: 44px;" />
+        <img id="六毫米圆盘缩分器" src="Resources/images/g3886.png" style="position: absolute; top: 677px;
+            left: 310px; width: 44px; height: 44px;" />
+        <img id="对辊破碎机" src="Resources/images/g3886.png" style="position: absolute; top: 167px;
+            left: 714px; width: 44px; height: 44px;" />
+        <img id="三毫米圆盘缩分器" src="Resources/images/g3886.png" style="position: absolute; top: 341px;
+            left: 714px; width: 44px; height: 44px;" />
+        <img id="三毫米二分振动器" src="Resources/images/g3886.png" style="position: absolute; top: 156px;
+            left: 1215px; width: 44px; height: 44px;" />
+        <img id="粉碎机" src="Resources/images/g3886.png" style="position: absolute; top: 449px;
+            left: 1215px; width: 44px; height: 44px;" />
+        <img id="零毫米二分振动器" src="Resources/images/g3886.png" style="position: absolute; top: 661px;
+            left: 1406px; width: 44px; height: 44px;" />
+    </div>
+    <div id="createtable" style="width: 800px; height: 385px; display: none; overflow: auto;">
+    </div>
+    <input type="hidden" id="hd_checked" value="" />
+</body>
+</html>

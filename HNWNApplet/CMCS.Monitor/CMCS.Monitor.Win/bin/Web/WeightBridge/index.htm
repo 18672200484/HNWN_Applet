@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Untitled Page</title>
+
+    <script type="text/javascript" src="../svg.js"> </script>
+
+    <script type="text/javascript">
+    
+    var twinkleColor="Green";
+    function twinkle(){
+        FillColor("pd_4a",twinkleColor);
+        if(twinkleColor=="Green")
+        twinkleColor="Red";
+        else
+        twinkleColor="Green";
+        
+    }
+    
+    function StartTwinkle(){
+        alert(example.getDateTime()); 
+    // window.setInterval("twinkle()",500);
+    }
+     
+    </script>
+
+</head>
+<body onload="InitSVG('SvgObject')">
+    <fieldset>
+        <legend>测试</legend>
+        <input type="button" onclick="FillColorSVG('tc_1','red')" value="针对群组进行颜色填充" />
+        <input type="button" onclick="FillColorSVG('arrow_3b_13','red')" value="针对单个进行颜色填充" />
+        <input type="button" onclick="Switch_ST('st_4a','0')" value="切换三通流向-无方向" />
+        <input type="button" onclick="Switch_ST('st_4a','1')" value="切换三通流向-左" />
+        <input type="button" onclick="Switch_ST('st_4a','2')" value="切换三通流向-右" />
+        <input type="button" onclick="Switch_LMQ('lmq_1','1')" value="切换犁煤器-上" />
+        <input type="button" onclick="Switch_LMQ('lmq_1','2')" value="切换犁煤器-下" />
+        <input type="button" onclick="Translate('dlj_13',100,0)" value="平移变换-左" />
+        <input type="button" onclick="Translate('dlj_13',0,0)" value="平移变换-右" />
+        <input type="button" onclick="SetTextValueSVG('txt_pd_9a_flow','123.52')" value="文本赋值" />
+        <input type="button" onclick="StartTwinkle()" value="闪烁" />
+    </fieldset>
+    <br />
+    <embed id="SvgObject" src="hanfeng_smck.svg" width="1300px" height="638px" type="image/svg+xml"
+        style="border: solid 1px red;" />   
+</body>
+</html>
