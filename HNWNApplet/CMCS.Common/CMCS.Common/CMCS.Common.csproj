@@ -86,6 +86,7 @@
     <Compile Include="Entities\AssayDevices\CmcsElementAssay.cs" />
     <Compile Include="Entities\BaseInfo\CmcsCamera.cs" />
     <Compile Include="Entities\BaseInfo\CmcsGoodsPlan.cs" />
+    <Compile Include="Entities\BaseInfo\CmcsGuardInfo.cs" />
     <Compile Include="Entities\BaseInfo\CmcsSupplierAssignSampler.cs" />
     <Compile Include="Entities\Fuel\FuelSampleCell.cs" />
     <Compile Include="Entities\Fuel\FuelSampleInOut.cs" />

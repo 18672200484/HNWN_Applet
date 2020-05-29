@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using CMCS.Common.Entities.Sys;
 
-namespace CMCS.DumblyConcealer.Tasks.DataHandler.Entities
+namespace CMCS.Common.Entities.BaseInfo
 {
     /// <summary>
     /// 门禁记录表

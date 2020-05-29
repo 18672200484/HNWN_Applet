@@ -81,7 +81,6 @@
     <Compile Include="Tasks\CarJxSampler\Entities\EquQCJXCYJUnloadResult.cs" />
     <Compile Include="Tasks\CarJxSampler\EquCarJXSamplerDAO.cs" />
     <Compile Include="Tasks\DataHandler\DataHandlerDAO.cs" />
-    <Compile Include="Tasks\DataHandler\Entities\CmcsGuardInfo.cs" />
     <Compile Include="Tasks\DataHandler\Enums\eEventCode.cs" />
     <Compile Include="Tasks\WeightBridger\EquWeightBridgerDAO.cs" />
   </ItemGroup>
@@ -100,6 +99,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Tasks\DataHandler\Entities\" />
     <Folder Include="Tasks\WeightBridger\Entities\" />
     <Folder Include="Utilities\" />
   </ItemGroup>

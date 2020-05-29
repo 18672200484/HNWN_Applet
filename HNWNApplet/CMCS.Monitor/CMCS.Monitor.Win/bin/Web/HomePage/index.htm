@@ -74,7 +74,8 @@
 
             canvas1.find("*[inkscape\\:label=入厂]").css("cursor", "pointer");
 
-            canvas1.find("*[inkscape\\:label=入厂]").bind("click", function (evt) {
+			canvas1.find("*[inkscape\\:label=入厂]").bind("click", function (evt) {
+				
                 //打开视频预览
                 HomePageV8Cef.OpenHikVideo(evt.target.getAttribute("inkscape:label"));
             });

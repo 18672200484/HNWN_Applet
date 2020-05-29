@@ -23,13 +23,14 @@
         }
 
         // 注册SVG元素脚本事件
-        function initSvgElementEvent() {
-
+		function initSvgElementEvent() {
+			//初始化
+			changeColorFill(canvas1.find("*[inkscape\\:label=点二单选_内],*[inkscape\\:label=备查单选_内]"), "#404041");
             canvas1.find("*[inkscape\\:label=点二单选]").each(function () {
                 $(this).css("cursor", "pointer");
                 $(this).bind("click", function () {
                     changeColorFill(canvas1.find("*[inkscape\\:label=点二单选_内]"), "#00A551");
-                    changeColorFill(canvas1.find("*[inkscape\\:label=原煤单选_内],*[inkscape\\:label=仲裁单选_内]"), "#404041");
+                    changeColorFill(canvas1.find("*[inkscape\\:label=原煤单选_内],*[inkscape\\:label=备查单选_内]"), "#404041");
                     // 选中存样柜
                     SampleStorageV8Cef.ChangeSelected("0.2mm");
                 });
@@ -38,15 +39,15 @@
                 $(this).css("cursor", "pointer");
                 $(this).bind("click", function () {
                     changeColorFill(canvas1.find("*[inkscape\\:label=原煤单选_内]"), "#00A551");
-                    changeColorFill(canvas1.find("*[inkscape\\:label=点二单选_内],*[inkscape\\:label=仲裁单选_内]"), "#404041");
+                    changeColorFill(canvas1.find("*[inkscape\\:label=点二单选_内],*[inkscape\\:label=备查单选_内]"), "#404041");
                     // 选中存样柜
                     SampleStorageV8Cef.ChangeSelected("原煤");
                 });
             });
-            canvas1.find("*[inkscape\\:label=仲裁单选]").each(function () {
+            canvas1.find("*[inkscape\\:label=备查单选]").each(function () {
                 $(this).css("cursor", "pointer");
                 $(this).bind("click", function () {
-                    changeColorFill(canvas1.find("*[inkscape\\:label=仲裁单选_内]"), "#00A551");
+                    changeColorFill(canvas1.find("*[inkscape\\:label=备查单选_内]"), "#00A551");
                     changeColorFill(canvas1.find("*[inkscape\\:label=点二单选_内],*[inkscape\\:label=原煤单选_内]"), "#404041");
                     // 选中存样柜
                     SampleStorageV8Cef.ChangeSelected("仲裁");

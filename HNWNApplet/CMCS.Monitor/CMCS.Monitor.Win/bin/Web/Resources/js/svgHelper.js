@@ -87,16 +87,17 @@ function changeScroll($elements, scroll) {
     });
 }
 
-function changeScale($elements,varbool) {
+function changeScale($elements, varbool) {
     $elements.each(function () {
         var $this = $(this);
-        //  alert("transform" + ":" + "rotate(" + scroll + ")");
-        //        $this.attr("transform", "translate(100 100)");
+
+        //$this.attr("transform", "translate(100 100)");
         if (varbool) {
-            $this.attr("transform", "scale(-1 1),translate(-1720 75)");
+            $this.attr("transform", "scale(-0.5, 0.5),translate(-3550 140)");
+            //$this.attr("transform", "scale(0.5, 0.5),translate(100 100)");
         }
         else {
-            $this.attr("transform", "scale(1 1),translate(0 0)");
+            $this.attr("transform", "scale(0.5,0.5),translate(0 0)");
         }
     });
 }
