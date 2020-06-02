@@ -1701,9 +1701,6 @@ namespace CMCS.CarTransport.Weighter.Frms
             if (!SaveBuyFuelTransport()) MessageBoxEx.Show("保存失败", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
-        //调用智能调运失败次数，3次失败后放行车辆
-        int ITMSMissCount = 0;
-
         /// <summary>
         /// 保存运输记录
         /// </summary>
@@ -1717,6 +1714,7 @@ namespace CMCS.CarTransport.Weighter.Frms
                 bool isDiff = false;
                 decimal diffValue = 0;
                 double deductWeight = 0;
+                string catagory = string.Empty; //卸煤点信息
 
                 decimal Weight = (decimal)Hardwarer.Wber.Weight;
 
@@ -1727,31 +1725,35 @@ namespace CMCS.CarTransport.Weighter.Frms
                     {
                         try
                         {
+                            ////测试
+                            //ZkBizResult entity = new ZkBizResult() { DispatchInfo = new DispatchInfo() { ReceiveDeductWeight = 1, Catagory = "000000001" }, Message = "", Status = true };
                             ZkBizResult entity = commService.GetDeductWeightInfo(this.CurrentAutotruck.CarNumber, this.PoundIndex);
-                            if (!entity.Status && ITMSMissCount < 2)
+                            if (entity == null)
                             {
-                                ITMSMissCount++;
-
-                                UpdateLedShow("智能调运读取失败，请联系管理员");
-                                this.voiceSpeaker.Speak("智能调运读取失败，请联系管理员", 1, false);
+                                UpdateLedShow("智能调运读取失败，请联系中矿");
+                                this.voiceSpeaker.Speak("智能调运读取失败，请联系中矿", 1, false);
+                                return false;
+                            }
+                            if (!entity.Status)
+                            {
+                                UpdateLedShow("智能调运读取失败，请联系中矿");
+                                this.voiceSpeaker.Speak("智能调运读取失败，请联系中矿", 1, false);
                                 return false;
                             }
 
                             deductWeight = entity.DispatchInfo.ReceiveDeductWeight;
+                            catagory = entity.DispatchInfo.Catagory;
+
                             commService.SetRcvWeight(this.CurrentAutotruck.CarNumber, (double)this.CurrentBuyFuelTransport.GrossWeight, (double)Weight, deductWeight, "", 0, this.PoundIndex);
                         }
                         catch (Exception ex)
                         {
                             Log4Neter.Error(this.CurrentAutotruck.CarNumber + "获取车辆扣吨信息且反馈车辆厂收信息", ex);
 
-                            if (ITMSMissCount < 2)
-                            {
-                                ITMSMissCount++;
+                            UpdateLedShow("智能调运读取失败，请联系管理员");
+                            this.voiceSpeaker.Speak("智能调运读取失败，请联系管理员", 1, false);
+                            return false;
 
-                                UpdateLedShow("智能调运读取失败，请联系管理员");
-                                this.voiceSpeaker.Speak("智能调运读取失败，请联系管理员", 1, false);
-                                return false;
-                            }
                         }
                     }
 
@@ -1770,7 +1772,7 @@ namespace CMCS.CarTransport.Weighter.Frms
                     }
                 }
 
-                if (weighterDAO.SaveBuyFuelTransport(this.CurrentBuyFuelTransport.Id, Weight, (decimal)deductWeight, DateTime.Now, this.CurrentAutotruck.EPCCardId, CommonAppConfig.GetInstance().AppIdentifier))
+                if (weighterDAO.SaveBuyFuelTransport(this.CurrentBuyFuelTransport.Id, Weight, (decimal)deductWeight, catagory, DateTime.Now, this.CurrentAutotruck.EPCCardId, CommonAppConfig.GetInstance().AppIdentifier))
                 {
                     this.CurrentBuyFuelTransport = commonDAO.SelfDber.Get<CmcsBuyFuelTransport>(this.CurrentBuyFuelTransport.Id);
 
@@ -1923,8 +1925,6 @@ namespace CMCS.CarTransport.Weighter.Frms
                         if (Hardwarer.Wber.Weight >= this.WbMinWeight && !HasCarOnEnterWay())
                         {
                             BackGateDown();
-
-                            ITMSMissCount = 0;  //重置失败次数
 
                             this.CurrentFlowFlag = eFlowFlag.等待稳定;
                         }

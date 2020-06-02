@@ -227,6 +227,11 @@ namespace CMCS.Common.Entities.CarTransport
         public virtual String UnLoadArea { get; set; }
 
         /// <summary>
+        /// 中矿卸煤、异常等信息存储字段
+        /// </summary>
+        public virtual String Catagory { get; set; }
+
+        /// <summary>
         /// 是否同步到批次
         /// </summary>
         public int IsSyncBatch { get; set; }

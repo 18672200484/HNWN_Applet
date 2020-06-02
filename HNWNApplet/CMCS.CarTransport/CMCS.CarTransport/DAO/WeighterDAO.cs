@@ -75,7 +75,7 @@ namespace CMCS.CarTransport.DAO
         /// <param name="rfid">rfid卡号</param>
         /// <param name="place"></param>
         /// <returns></returns>
-        public bool SaveBuyFuelTransport(string transportId, decimal weight, decimal deductWeight, DateTime dt, string rfid, string place)
+        public bool SaveBuyFuelTransport(string transportId, decimal weight, decimal deductWeight, string catagory, DateTime dt, string rfid, string place)
         {
             if (weight <= 0)
                 throw new Exception("重量异常");
@@ -119,6 +119,18 @@ namespace CMCS.CarTransport.DAO
                 //transport.DeductWeight = GetDeductWeight(transport.Id);
                 transport.DeductWeight = deductWeight;
                 transport.SuttleWeight = transport.GrossWeight - transport.TareWeight - transport.DeductWeight;
+
+                //卸煤点信息
+                try
+                {
+                    if (!string.IsNullOrWhiteSpace(catagory))
+                    {
+                        string xmd = catagory.Substring(catagory.Length - 1, 1);
+                        transport.UnLoadArea = xmd == "1" ? "南煤场东段" : (xmd == "2" ? "南煤场西段" : (xmd == "3" ? "北煤场东段" : (xmd == "4" ? "北煤场西段" : "卸煤沟")));
+                    }
+                }
+                catch (Exception ex) { Log4Neter.Error("卸煤点解析错误", ex); }
+                transport.Catagory = catagory;
 
                 // 回皮即完结
                 transport.IsFinish = 1;

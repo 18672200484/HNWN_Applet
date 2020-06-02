@@ -2628,7 +2628,7 @@ namespace CMCS.CarTransport.Queue.Frms
                         timer_Out.Interval = 500;
 
                         //List<string> tags = Hardwarer.RwerOut.ScanTags();
-                        List<string> tags = new List<string>() { "BBAAC4DCCEBCC4CF00000461" };
+                        List<string> tags = new List<string>() { "BBAAC4DCCEBCC4CF00000618" };
                         if (tags.Count > 0) passCarQueuerOut.Enqueue(ePassWay.Way1, tags[0], true);
 
                         if (passCarQueuerOut.Count > 0) this.CurrentFlowFlagOut = eFlowFlag.识别车辆;
@@ -2765,6 +2765,7 @@ namespace CMCS.CarTransport.Queue.Frms
                                     else
                                     {
                                         UpdateShowDebug(this.CurrentAutotruckOut.CarNumber, "称重未完成");
+                                        this.CurrentFlowFlagOut = eFlowFlag.异常重置2;
 
                                         timer_Out.Interval = 8000;
                                     }
@@ -2772,9 +2773,17 @@ namespace CMCS.CarTransport.Queue.Frms
                                 else
                                 {
                                     UpdateShowDebug("路线错误", "禁止通过");
+                                    this.CurrentFlowFlagOut = eFlowFlag.异常重置2;
 
                                     timer_Out.Interval = 8000;
                                 }
+                            }
+                            else
+                            {
+                                UpdateShowDebug(this.CurrentAutotruckOut.CarNumber, "请离开");
+                                this.CurrentFlowFlagOut = eFlowFlag.等待离开;
+
+                                timer_Out.Interval = 2000;
                             }
                         }
                         else
@@ -2837,6 +2846,17 @@ namespace CMCS.CarTransport.Queue.Frms
 
                     LetPass();
 
+                    //打印磅单 
+                    if (this.CurrentBuyFuelTransportOut.SuttleWeight > 0)
+                    {
+                        //异步打印
+                        new Task(() =>
+                        {
+                            try { ReportPrint.GetInstance().PrintBuyFuelTransport(this.CurrentBuyFuelTransportOut); }
+                            catch (Exception ex) { Log4Neter.Error("打印失败", ex); }
+                        }).Start();
+                    }
+
                     return true;
                 }
             }
@@ -2868,6 +2888,16 @@ namespace CMCS.CarTransport.Queue.Frms
 
                     LetPass();
 
+                    //打印磅单 
+                    if (this.CurrentGoodsTransportOut.SuttleWeight > 0)
+                    {
+                        //异步打印
+                        new Task(() =>
+                        {
+                            try { ReportPrint.GetInstance().PrintGoodsTransport(this.CurrentGoodsTransportOut); }
+                            catch (Exception ex) { Log4Neter.Error("打印失败", ex); }
+                        }).Start();
+                    }
                     return true;
                 }
             }
