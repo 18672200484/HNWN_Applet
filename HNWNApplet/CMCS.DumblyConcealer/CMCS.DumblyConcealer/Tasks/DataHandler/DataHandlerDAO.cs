@@ -15,7 +15,6 @@ using CMCS.DapperDber.Dbs.OracleDb;
 using CMCS.DapperDber.Dbs.SqlServerDb;
 using CMCS.DumblyConcealer.Enums;
 using CMCS.DumblyConcealer.Tasks.CarSynchronous.Enums;
-using CMCS.DumblyConcealer.Tasks.DataHandler.Entities;
 using CMCS.DapperDber.Util;
 using HikISCApi.Core;
 using CMCS.Common.Enums;
