@@ -132,7 +132,7 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.SaleFuelTransport
         {
             try
             {
-                FileStream file = new FileStream("计量明细模板.xls", FileMode.Open, FileAccess.Read);
+                FileStream file = new FileStream(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "计量明细模板.xls"), FileMode.Open, FileAccess.Read);
                 HSSFWorkbook hssfworkbook = new HSSFWorkbook(file);
                 HSSFSheet sheetl = (HSSFSheet)hssfworkbook.GetSheet("计量明细");
 

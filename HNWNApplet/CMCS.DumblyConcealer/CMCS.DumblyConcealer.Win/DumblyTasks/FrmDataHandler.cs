@@ -60,6 +60,7 @@ namespace CMCS.DumblyConcealer.Win.DumblyTasks
                 dataHandlerDAO.SyncBaseInfoForDYJHK(this.rTxtOutputer.Output, qgcDapperDber);
                 dataHandlerDAO.SyncBaseInfoForYAPFK(this.rTxtOutputer.Output, qgcDapperDber);
                 dataHandlerDAO.SyncBaseInfoForQCLMYGP(this.rTxtOutputer.Output, qgcDapperDber);
+                dataHandlerDAO.SyncBaseInfoForWZJHCL(this.rTxtOutputer.Output, qgcDapperDber);
                 dataHandlerDAO.SyncBaseInfoForJLMZ(this.rTxtOutputer.Output, qgcDapperDber);
                 dataHandlerDAO.SyncBaseInfoForJLPZ(this.rTxtOutputer.Output, qgcDapperDber);
 

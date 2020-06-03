@@ -83,6 +83,7 @@ namespace CMCS.CarTransport.DAO
                 Mpph = Mpph,
                 SamplePlace = sampler,
                 StepName = eTruckInFactoryStep.入厂.ToString(),
+                HistoryTareAvg = GetHistoryTareAvg(autotruck.CarNumber),
                 Remark = remark
             };
 
@@ -262,6 +263,20 @@ namespace CMCS.CarTransport.DAO
             return false;
         }
 
+        /// <summary>
+        /// 获取车辆历史皮重平均值
+        /// </summary>
+        /// <param name="carNumber">车牌号</param>
+        /// <returns></returns>
+        public decimal GetHistoryTareAvg(string carNumber)
+        {
+            decimal TareWeightAvg = 0;
+            object obj = SelfDber.CreateConnection().ExecuteScalar("select round(avg(t.tareweight),2)  as TareWeightAvg from cmcstbbuyfueltransport t where t.carnumber =:CarNumber and t.tareweight > 0", new { CarNumber = carNumber });
+            if (obj != null)
+                decimal.TryParse(obj.ToString(), out TareWeightAvg);
+
+            return TareWeightAvg;
+        }
         #endregion
 
         #region 销售煤业务

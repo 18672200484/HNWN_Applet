@@ -1647,7 +1647,7 @@ namespace CMCS.CarTransport.Queue.Frms
 
                             #region 汽车来煤预归批
 
-                            this.CurrentQCLMYGP = Dbers.GetInstance().SelfDber.Entity<View_rlgl_cygl_qclmygp>("where Dybh=:Dybh and to_char(PlanTime,'YYYYMMDD')=to_char(:PlanTime,'YYYYMMDD')", new { Dybh = CurrentZkBizResult.DispatchInfo.TaskNo, PlanTime = DateTime.Now });
+                            this.CurrentQCLMYGP = Dbers.GetInstance().SelfDber.Entity<View_rlgl_cygl_qclmygp>("where Dybh=:Dybh and Is_Del='0' and to_char(PlanTime,'YYYYMMDD')=to_char(:PlanTime,'YYYYMMDD')", new { Dybh = CurrentZkBizResult.DispatchInfo.TaskNo, PlanTime = DateTime.Now });
                             if (this.CurrentQCLMYGP == null)
                             {
                                 UpdateLedShow("来煤预归批读取失败，请稍等");
@@ -2464,8 +2464,28 @@ namespace CMCS.CarTransport.Queue.Frms
                     case eFlowFlag.匹配调运:
                         #region
 
-                        CmcsGoodsPlan cmcsGoodsPlan = Dbers.GetInstance().SelfDber.Entity<CmcsGoodsPlan>("where CarNumber=:CarNumber", new { CarNumber = this.CurrentAutotruck.CarNumber });
-                        if (cmcsGoodsPlan == null)
+                        #region 临时调运计划
+
+                        //CmcsGoodsPlan cmcsGoodsPlan = Dbers.GetInstance().SelfDber.Entity<CmcsGoodsPlan>("where CarNumber=:CarNumber", new { CarNumber = this.CurrentAutotruck.CarNumber });
+                        //if (cmcsGoodsPlan == null)
+                        //{
+                        //    UpdateLedShow(this.CurrentAutotruck.CarNumber + "未找到物资计划，请联系管理员");
+                        //    timer_Goods.Interval = 8000;
+                        //    this.CurrentFlowFlag = eFlowFlag.异常重置2;
+                        //    break;
+                        //}
+
+                        //this.SelectedSupplyUnit_Goods = Dbers.GetInstance().SelfDber.Get<CmcsSupplier>(cmcsGoodsPlan.SupplyUnitId);
+                        //this.SelectedReceiveUnit_Goods = Dbers.GetInstance().SelfDber.Get<CmcsSupplier>(cmcsGoodsPlan.ReceiveUnitId);
+                        //this.SelectedGoodsType_Goods = Dbers.GetInstance().SelfDber.Get<CmcsGoodsType>(cmcsGoodsPlan.GoodsTypeId);
+                        //this.CurrentFlowFlag = eFlowFlag.自动保存;
+
+                        #endregion
+
+                        #region 全过程调运计划
+
+                        View_rlgl_wzjh_cl view_rlgl_wzjh_cl = Dbers.GetInstance().SelfDber.Entity<View_rlgl_wzjh_cl>("where Chph=:Chph and Is_del='0' and Begdate<=:dt and Enddate>=:dt", new { Chph = this.CurrentAutotruck.CarNumber, dt = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd")) });
+                        if (view_rlgl_wzjh_cl == null)
                         {
                             UpdateLedShow(this.CurrentAutotruck.CarNumber + "未找到物资计划，请联系管理员");
                             timer_Goods.Interval = 8000;
@@ -2473,10 +2493,29 @@ namespace CMCS.CarTransport.Queue.Frms
                             break;
                         }
 
-                        this.SelectedSupplyUnit_Goods = Dbers.GetInstance().SelfDber.Get<CmcsSupplier>(cmcsGoodsPlan.SupplyUnitId);
-                        this.SelectedReceiveUnit_Goods = Dbers.GetInstance().SelfDber.Get<CmcsSupplier>(cmcsGoodsPlan.ReceiveUnitId);
-                        this.SelectedGoodsType_Goods = Dbers.GetInstance().SelfDber.Get<CmcsGoodsType>(cmcsGoodsPlan.GoodsTypeId);
+                        if (view_rlgl_wzjh_cl.Lxmc == "出厂流向")
+                        {
+                            this.SelectedSupplyUnit_Goods = Dbers.GetInstance().SelfDber.Entity<CmcsSupplier>("where Name=:Name", new { Name = "华能陕西渭南热电有限公司" });
+                            this.SelectedReceiveUnit_Goods = Dbers.GetInstance().SelfDber.Entity<CmcsSupplier>("where Name=:Name", new { Name = view_rlgl_wzjh_cl.Khqc });
+                        }
+                        else if (view_rlgl_wzjh_cl.Lxmc == "入厂流向")
+                        {
+                            this.SelectedSupplyUnit_Goods = Dbers.GetInstance().SelfDber.Entity<CmcsSupplier>("where Name=:Name", new { Name = view_rlgl_wzjh_cl.Gysqc });
+                            this.SelectedReceiveUnit_Goods = Dbers.GetInstance().SelfDber.Entity<CmcsSupplier>("where Name=:Name", new { Name = "华能陕西渭南热电有限公司" });
+                        }
+
+                        if (this.SelectedSupplyUnit_Goods == null || this.SelectedReceiveUnit_Goods == null)
+                        {
+                            UpdateLedShow(this.CurrentAutotruck.CarNumber + "物资计划单位不存在，请联系管理员");
+                            timer_Goods.Interval = 8000;
+                            this.CurrentFlowFlag = eFlowFlag.异常重置2;
+                            break;
+                        }
+
+                        this.SelectedGoodsType_Goods = Dbers.GetInstance().SelfDber.Entity<CmcsGoodsType>("where GoodsName=:GoodsName", new { GoodsName = view_rlgl_wzjh_cl.Wljc });
                         this.CurrentFlowFlag = eFlowFlag.自动保存;
+
+                        #endregion
 
                         #endregion
                         break;
@@ -2627,8 +2666,7 @@ namespace CMCS.CarTransport.Queue.Frms
                         //提高灵敏度
                         timer_Out.Interval = 500;
 
-                        //List<string> tags = Hardwarer.RwerOut.ScanTags();
-                        List<string> tags = new List<string>() { "BBAAC4DCCEBCC4CF00000618" };
+                        List<string> tags = Hardwarer.RwerOut.ScanTags();
                         if (tags.Count > 0) passCarQueuerOut.Enqueue(ePassWay.Way1, tags[0], true);
 
                         if (passCarQueuerOut.Count > 0) this.CurrentFlowFlagOut = eFlowFlag.识别车辆;

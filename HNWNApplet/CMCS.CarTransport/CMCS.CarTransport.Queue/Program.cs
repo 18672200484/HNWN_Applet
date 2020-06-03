@@ -47,7 +47,7 @@ namespace CMCS.CarTransport.Queue
             try
             {
                 CMCS.Common.DAO.CommonDAO.GetInstance().SetSignalDataValue(CommonAppConfig.GetInstance().AppIdentifier, eSignalDataName.系统.ToString(), "1");
-
+                
                 bool notRun;
                 using (Mutex mutex = new Mutex(true, Application.ProductName, out notRun))
                 {

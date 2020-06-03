@@ -435,6 +435,16 @@ namespace CMCS.CarTransport.Weighter.Frms
         decimal TicketDiff = 0;
 
         /// <summary>
+        /// 是否皮重排查系数
+        /// </summary>
+        bool IsTareCoefficient = false;
+
+        /// <summary>
+        /// 皮重排查系数
+        /// </summary>
+        decimal TareCoefficient = 0;
+
+        /// <summary>
         /// 磅编号
         /// </summary>
         int PoundIndex = 1;
@@ -1023,6 +1033,8 @@ namespace CMCS.CarTransport.Weighter.Frms
                 this.IsITMS = commonDAO.GetCommonAppletConfigString("启用智能调运") == "1";
                 this.IsTicketDiff = commonDAO.GetCommonAppletConfigString("启用净重超差限值") == "1";
                 this.TicketDiff = (decimal)commonDAO.GetCommonAppletConfigDouble("净重超差限值");
+                this.IsTareCoefficient = commonDAO.GetCommonAppletConfigString("启用皮重排查系数") == "1";
+                this.TareCoefficient = (decimal)commonDAO.GetCommonAppletConfigDouble("皮重排查系数");
 
                 // IO控制器
                 //Hardwarer.Iocer.OnReceived += new IOC.JMDM20DIOV2.JMDM20DIOV2Iocer.ReceivedEventHandler(Iocer_Received);
@@ -1455,7 +1467,8 @@ namespace CMCS.CarTransport.Weighter.Frms
                 this.IsITMS = commonDAO.GetCommonAppletConfigString("启用智能调运") == "1";
                 this.IsTicketDiff = commonDAO.GetCommonAppletConfigString("启用净重超差限值") == "1";
                 this.TicketDiff = (decimal)commonDAO.GetCommonAppletConfigDouble("净重超差限值");
-
+                this.IsTareCoefficient = commonDAO.GetCommonAppletConfigString("启用皮重排查系数") == "1";
+                this.TareCoefficient = (decimal)commonDAO.GetCommonAppletConfigDouble("皮重排查系数");
             }
             catch (Exception ex)
             {
@@ -1718,9 +1731,32 @@ namespace CMCS.CarTransport.Weighter.Frms
 
                 decimal Weight = (decimal)Hardwarer.Wber.Weight;
 
+                if (this.CurrentBuyFuelTransport.StepName != eTruckInFactoryStep.重车.ToString())
+                {
+                    //重车
+
+                    #region 皮重排查系数
+                    if (this.IsTareCoefficient && this.CurrentBuyFuelTransport.TicketWeight > 0 && this.CurrentBuyFuelTransport.HistoryTareAvg > 0)
+                    {
+                        //超差判断：（过衡毛重 - 历史皮重均值 ）/ 矿发量 > 1.4   或者 矿发量 /（过衡毛重 - 历史皮重均值 ）> 1.4,自动报警；
+                        decimal TareWeightAvg = this.CurrentBuyFuelTransport.HistoryTareAvg;
+                        if ((Weight - TareWeightAvg) / this.CurrentBuyFuelTransport.TicketWeight > this.TareCoefficient ||
+                             this.CurrentBuyFuelTransport.TicketWeight / (Weight - TareWeightAvg) > this.TareCoefficient)
+                        {
+                            UpdateLedShow(this.CurrentAutotruck.CarNumber + "净重超差");
+                            this.voiceSpeaker.Speak(this.CurrentAutotruck.CarNumber + "净重超差", 1, false);
+                            return false;
+                        }
+                    }
+                    #endregion
+
+                }
                 if (this.CurrentBuyFuelTransport.StepName == eTruckInFactoryStep.重车.ToString())
                 {
-                    //启用智能调运
+                    //回皮
+
+                    #region 智能调运
+
                     if (this.IsITMS)
                     {
                         try
@@ -1757,7 +1793,10 @@ namespace CMCS.CarTransport.Weighter.Frms
                         }
                     }
 
-                    //启用净重超差
+                    #endregion
+
+                    #region 净重超差
+
                     if (this.IsTicketDiff && this.CurrentBuyFuelTransport.TicketWeight > 0)
                     {
                         isDiff = Math.Abs(this.CurrentBuyFuelTransport.GrossWeight - Weight - this.CurrentBuyFuelTransport.TicketWeight) - this.TicketDiff > 0;
@@ -1770,6 +1809,8 @@ namespace CMCS.CarTransport.Weighter.Frms
                             return false;
                         }
                     }
+
+                    #endregion
                 }
 
                 if (weighterDAO.SaveBuyFuelTransport(this.CurrentBuyFuelTransport.Id, Weight, (decimal)deductWeight, catagory, DateTime.Now, this.CurrentAutotruck.EPCCardId, CommonAppConfig.GetInstance().AppIdentifier))

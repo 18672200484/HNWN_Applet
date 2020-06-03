@@ -134,6 +134,7 @@
     <Compile Include="Entities\Inf\View_rlgl_dygl_hw.cs" />
     <Compile Include="Entities\Inf\View_rlgl_jlgl_mz.cs" />
     <Compile Include="Entities\Inf\View_rlgl_jlgl_pz.cs" />
+    <Compile Include="Entities\Inf\View_rlgl_wzjh_cl.cs" />
     <Compile Include="Entities\Sys\CmcsConfirmOperationLog.cs" />
     <Compile Include="Entities\Sys\CmcsModifyLog.cs" />
     <Compile Include="Entities\Sys\SysModule.cs" />

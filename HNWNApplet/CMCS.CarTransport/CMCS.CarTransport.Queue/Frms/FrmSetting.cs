@@ -114,6 +114,8 @@ namespace CMCS.CarTransport.Queue.Frms
             chkFactoryCount.Checked = (commonDAO.GetCommonAppletConfigString("启用厂内总车数") == "1");
             txtTicketDiff.Value = commonDAO.GetCommonAppletConfigDouble("净重超差限值");
             chkTicketDiff.Checked = (commonDAO.GetCommonAppletConfigString("启用净重超差限值") == "1");
+            txtTareCoefficient.Value = commonDAO.GetCommonAppletConfigDouble("皮重排查系数");
+            chkTareCoefficient.Checked = (commonDAO.GetCommonAppletConfigString("启用皮重排查系数") == "1");
 
             // IO控制器
             SelectedComboBoxItem(cmbIocerCom, commonDAO.GetAppletConfigInt32("IO控制器_串口").ToString());
@@ -192,6 +194,8 @@ namespace CMCS.CarTransport.Queue.Frms
             commonDAO.SetCommonAppletConfig("启用厂内总车数", Convert.ToInt16(chkFactoryCount.Checked).ToString());
             commonDAO.SetCommonAppletConfig("净重超差限值", txtTicketDiff.Value.ToString());
             commonDAO.SetCommonAppletConfig("启用净重超差限值", Convert.ToInt16(chkTicketDiff.Checked).ToString());
+            commonDAO.SetCommonAppletConfig("皮重排查系数", txtTareCoefficient.Value.ToString());
+            commonDAO.SetCommonAppletConfig("启用皮重排查系数", Convert.ToInt16(chkTareCoefficient.Checked).ToString());
 
             // IO控制器
             commonDAO.SetAppletConfig("IO控制器_串口", (cmbIocerCom.SelectedItem as DataItem).Value);

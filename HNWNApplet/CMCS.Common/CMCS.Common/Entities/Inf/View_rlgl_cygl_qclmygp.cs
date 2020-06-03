@@ -73,5 +73,9 @@ namespace CMCS.Common.Entities.Inf
         /// 变异系数
         /// </summary>
         public decimal Byxh { get; set; }
+        /// <summary>
+        /// 删除标识
+        /// </summary>
+        public string Is_Del { get; set; }
     }
 }

@@ -47,6 +47,7 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
             DevComponents.DotNetBar.SuperGrid.GridColumn gridColumn16 = new DevComponents.DotNetBar.SuperGrid.GridColumn();
             DevComponents.DotNetBar.SuperGrid.GridColumn gridColumn17 = new DevComponents.DotNetBar.SuperGrid.GridColumn();
             DevComponents.DotNetBar.SuperGrid.GridColumn gridColumn18 = new DevComponents.DotNetBar.SuperGrid.GridColumn();
+            DevComponents.DotNetBar.SuperGrid.GridColumn gridColumn19 = new DevComponents.DotNetBar.SuperGrid.GridColumn();
             this.superGridControl1 = new DevComponents.DotNetBar.SuperGrid.SuperGridControl();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiPrint = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,6 +57,7 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
             this.btnNext = new DevComponents.DotNetBar.ButtonX();
             this.btnSearch = new DevComponents.DotNetBar.ButtonX();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.lblPagerInfo = new DevComponents.DotNetBar.LabelX();
             this.superGridControl2 = new DevComponents.DotNetBar.SuperGrid.SuperGridControl();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
@@ -74,7 +76,6 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
             this.dtInputStart = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.txtCarNumber_Ser = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.label1 = new System.Windows.Forms.Label();
             this.contextMenuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
@@ -206,22 +207,27 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
             gridColumn15.Name = "SuttleWeight";
             gridColumn15.Width = 80;
             gridColumn16.AutoSizeMode = DevComponents.DotNetBar.SuperGrid.ColumnAutoSizeMode.AllCells;
-            gridColumn16.CellStyles.Default.Alignment = DevComponents.DotNetBar.SuperGrid.Style.Alignment.MiddleCenter;
-            gridColumn16.DataPropertyName = "";
-            gridColumn16.HeaderText = "有效";
-            gridColumn16.InfoImageAlignment = DevComponents.DotNetBar.SuperGrid.Style.Alignment.MiddleCenter;
-            gridColumn16.Name = "clmIsUse";
-            gridColumn16.Width = 80;
-            gridColumn17.AutoSizeMode = DevComponents.DotNetBar.SuperGrid.ColumnAutoSizeMode.Fill;
+            gridColumn16.DataPropertyName = "HistoryTareAvg";
+            gridColumn16.FillWeight = 120;
+            gridColumn16.HeaderText = "历史皮重平均值";
+            gridColumn16.Name = "HistoryTareAvg";
+            gridColumn17.AutoSizeMode = DevComponents.DotNetBar.SuperGrid.ColumnAutoSizeMode.AllCells;
             gridColumn17.CellStyles.Default.Alignment = DevComponents.DotNetBar.SuperGrid.Style.Alignment.MiddleCenter;
-            gridColumn17.DataPropertyName = "Remark";
-            gridColumn17.HeaderText = "备注";
+            gridColumn17.DataPropertyName = "";
+            gridColumn17.HeaderText = "有效";
             gridColumn17.InfoImageAlignment = DevComponents.DotNetBar.SuperGrid.Style.Alignment.MiddleCenter;
-            gridColumn17.Name = "Remark";
+            gridColumn17.Name = "clmIsUse";
             gridColumn17.Width = 80;
-            gridColumn18.DataPropertyName = "Id";
-            gridColumn18.Name = "clmId";
-            gridColumn18.Visible = false;
+            gridColumn18.AutoSizeMode = DevComponents.DotNetBar.SuperGrid.ColumnAutoSizeMode.Fill;
+            gridColumn18.CellStyles.Default.Alignment = DevComponents.DotNetBar.SuperGrid.Style.Alignment.MiddleCenter;
+            gridColumn18.DataPropertyName = "Remark";
+            gridColumn18.HeaderText = "备注";
+            gridColumn18.InfoImageAlignment = DevComponents.DotNetBar.SuperGrid.Style.Alignment.MiddleCenter;
+            gridColumn18.Name = "Remark";
+            gridColumn18.Width = 80;
+            gridColumn19.DataPropertyName = "Id";
+            gridColumn19.Name = "clmId";
+            gridColumn19.Visible = false;
             this.superGridControl1.PrimaryGrid.Columns.Add(gridColumn1);
             this.superGridControl1.PrimaryGrid.Columns.Add(gridColumn2);
             this.superGridControl1.PrimaryGrid.Columns.Add(gridColumn3);
@@ -240,6 +246,7 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
             this.superGridControl1.PrimaryGrid.Columns.Add(gridColumn16);
             this.superGridControl1.PrimaryGrid.Columns.Add(gridColumn17);
             this.superGridControl1.PrimaryGrid.Columns.Add(gridColumn18);
+            this.superGridControl1.PrimaryGrid.Columns.Add(gridColumn19);
             this.superGridControl1.PrimaryGrid.InitialSelection = DevComponents.DotNetBar.SuperGrid.RelativeSelection.Row;
             this.superGridControl1.PrimaryGrid.SelectionGranularity = DevComponents.DotNetBar.SuperGrid.SelectionGranularity.Row;
             this.superGridControl1.Size = new System.Drawing.Size(1419, 611);
@@ -355,6 +362,19 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1419, 40);
             this.panel2.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(388, 7);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(240, 25);
+            this.label1.TabIndex = 105;
+            this.label1.Text = "列表增加列后，注意合计行";
+            this.label1.Visible = false;
             // 
             // lblPagerInfo
             // 
@@ -716,18 +736,6 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
             this.txtCarNumber_Ser.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtCarNumber_Ser.WatermarkImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.txtCarNumber_Ser.WatermarkText = "请输入车牌号...";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Lime;
-            this.label1.Location = new System.Drawing.Point(388, 7);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(240, 25);
-            this.label1.TabIndex = 105;
-            this.label1.Text = "列表增加列后，注意合计行";
-            this.label1.Visible = false;
             // 
             // FrmBuyFuelTransport_List
             // 

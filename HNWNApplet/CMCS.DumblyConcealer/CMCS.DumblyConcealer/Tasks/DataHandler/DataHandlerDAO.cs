@@ -15,7 +15,6 @@ using CMCS.DapperDber.Dbs.OracleDb;
 using CMCS.DapperDber.Dbs.SqlServerDb;
 using CMCS.DumblyConcealer.Enums;
 using CMCS.DumblyConcealer.Tasks.CarSynchronous.Enums;
-using CMCS.DumblyConcealer.Tasks.DataHandler.Entities;
 using CMCS.DapperDber.Util;
 using HikISCApi.Core;
 using CMCS.Common.Enums;
@@ -289,14 +288,14 @@ namespace CMCS.DumblyConcealer.Tasks.CarSynchronous
                 foreach (View_rlgl_chlgl_yapfk qgc_dyjh in commonDAO.SelfDber.Entities<View_rlgl_chlgl_yapfk>("where issync=0"))
                 {
                     if (sqlDapperDber.Insert(new View_rlgl_chlgl_yapfk_QGC()
-                      {
-                          Yptime = qgc_dyjh.Yptime,
-                          Chph = qgc_dyjh.Chph,
-                          Cyjbm = qgc_dyjh.Cyjbm,
-                          Kfl = qgc_dyjh.Kfl,
-                          Dybh = qgc_dyjh.Dybh,
-                          Rfid_xlh = qgc_dyjh.Rfid_xlh
-                      }) > 0)
+                    {
+                        Yptime = qgc_dyjh.Yptime,
+                        Chph = qgc_dyjh.Chph,
+                        Cyjbm = qgc_dyjh.Cyjbm,
+                        Kfl = qgc_dyjh.Kfl,
+                        Dybh = qgc_dyjh.Dybh,
+                        Rfid_xlh = qgc_dyjh.Rfid_xlh
+                    }) > 0)
                     {
                         res++;
 
@@ -537,6 +536,33 @@ namespace CMCS.DumblyConcealer.Tasks.CarSynchronous
         }
 
         /// <summary>
+        /// 同步全过程物资车信息(物资车信息)
+        /// </summary>
+        public void SyncBaseInfoForWZJHCL(Action<string, eOutputType> output, SqlServerDapperDber sqlDapperDber)
+        {
+            int res = 0;
+
+            try
+            {
+                foreach (View_rlgl_wzjh_cl qgc_wzjhcl in sqlDapperDber.Entities<View_rlgl_wzjh_cl>())
+                {
+                    if (commonDAO.SelfDber.Get<View_rlgl_wzjh_cl>(qgc_wzjhcl.Dbid.ToString()) != null)
+                        commonDAO.SelfDber.Update<View_rlgl_wzjh_cl>(qgc_wzjhcl);
+                    else
+                        commonDAO.SelfDber.Insert<View_rlgl_wzjh_cl>(qgc_wzjhcl);
+
+                    res++;
+                }
+            }
+            catch (Exception ex)
+            {
+                output("同步物资车信息报错，" + ex.Message, eOutputType.Error);
+            }
+
+            output(string.Format("同步物资车信息{0}条", res), eOutputType.Normal);
+        }
+
+        /// <summary>
         /// 同步全过程基础信息(重车计量反馈)
         /// </summary>
         public void SyncBaseInfoForJLMZ(Action<string, eOutputType> output, SqlServerDapperDber sqlDapperDber)
@@ -690,7 +716,7 @@ namespace CMCS.DumblyConcealer.Tasks.CarSynchronous
         /// <summary>
         /// 事件类型字典表
         /// </summary>
-        Dictionary<int, string> dicEventType = new Dictionary<int, string>() 
+        Dictionary<int, string> dicEventType = new Dictionary<int, string>()
         {
          {196893,"人脸认证通过"},
          {197127,"指纹比对通过"},

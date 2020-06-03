@@ -232,6 +232,11 @@ namespace CMCS.Common.Entities.CarTransport
         public virtual String Catagory { get; set; }
 
         /// <summary>
+        /// 历史皮重平均值
+        /// </summary>
+        public virtual Decimal HistoryTareAvg { get; set; }
+
+        /// <summary>
         /// 是否同步到批次
         /// </summary>
         public int IsSyncBatch { get; set; }
