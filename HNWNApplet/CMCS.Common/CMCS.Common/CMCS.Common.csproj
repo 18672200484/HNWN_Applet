@@ -91,6 +91,7 @@
     <Compile Include="Entities\Fuel\FuelSampleCell.cs" />
     <Compile Include="Entities\Fuel\FuelSampleInOut.cs" />
     <Compile Include="Entities\iEAA\CmcsUser.cs" />
+    <Compile Include="Entities\Inf\InfAutoCupBoard.cs" />
     <Compile Include="Entities\Inf\InfBeltSamplerUnloadResult.cs" />
     <Compile Include="Entities\CarTransport\CmcsTruckInFactoryWay.cs" />
     <Compile Include="Entities\CarTransport\CmcsTruckInFactoryWayDetail.cs" />

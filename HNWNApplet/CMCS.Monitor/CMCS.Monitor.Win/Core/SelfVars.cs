@@ -77,7 +77,7 @@ namespace CMCS.Monitor.Win.Core
         /// </summary>
         public static string Url_SampleStorage = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Web/SampleStorage/index.htm");
 
-        public static String CurrentSelectedCell = "0.2mm";
+        public static String CurrentSelectedCell = "原煤样样柜";
         #endregion
 
         #region 翻车机

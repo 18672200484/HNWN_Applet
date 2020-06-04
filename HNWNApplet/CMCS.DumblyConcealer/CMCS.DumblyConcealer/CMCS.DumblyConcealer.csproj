@@ -55,6 +55,9 @@
     <Compile Include="Enums\eOutputType.cs" />
     <Compile Include="Enums\eMachineCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tasks\AutoCupboard\Entities\EquCYGDetail.cs" />
+    <Compile Include="Tasks\AutoCupboard\Entities\EquCYG.cs" />
+    <Compile Include="Tasks\AutoCupboard\EquAutoCupboardDAO.cs" />
     <Compile Include="Tasks\AssayDevice\Entities\CLY_5E8SAII.cs" />
     <Compile Include="Tasks\AssayDevice\Entities\LRY_5EC5500A.cs" />
     <Compile Include="Tasks\AssayDevice\Entities\SFY_5EMW6510.cs" />
@@ -104,6 +107,7 @@
     <Folder Include="Utilities\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Tasks\AutoCupboard\存样柜数据同步接口.txt" />
     <Content Include="Tasks\AssayDevice\Entities\从化验设备取数后的中间库映射实体.txt" />
     <Content Include="Tasks\AssayDevice\化验数据同步接口.txt" />
     <Content Include="Tasks\AutoMaker\全自动制样机接口.txt" />
