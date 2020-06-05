@@ -73,7 +73,7 @@ namespace CMCS.DumblyConcealer.Tasks.CarSynchronous
                             Xshzh_EndDate = qgc_chlgl.Xshzh_enddate,
                             Zgzh_EndDate = qgc_chlgl.Zgzh_enddate,
                             IsUse = 1,
-                            CarType = "入厂煤"
+                            CarType = qgc_chlgl.Cllx == 965 ? "入厂煤" : "其他物资"
                         });
                     }
                     else
@@ -86,7 +86,7 @@ namespace CMCS.DumblyConcealer.Tasks.CarSynchronous
                         cmcsAutotruck.Xshzh_EndDate = qgc_chlgl.Xshzh_enddate;
                         cmcsAutotruck.Zgzh_EndDate = qgc_chlgl.Zgzh_enddate;
                         cmcsAutotruck.IsUse = 1;
-                        cmcsAutotruck.CarType = "入厂煤";
+                        cmcsAutotruck.CarType = qgc_chlgl.Cllx == 965 ? "入厂煤" : "其他物资";
                         commonDAO.SelfDber.Update(cmcsAutotruck);
                     }
 

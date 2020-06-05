@@ -97,5 +97,10 @@ namespace CMCS.Common.Entities.Inf
         /// 道路从业资格证有效时间止
         /// </summary>
         public DateTime Zgzh_enddate { get; set; }
+
+        /// <summary>
+        /// 车辆类型 965煤车，966物资车
+        /// </summary>
+        public int Cllx { get; set; }
     }
 }
