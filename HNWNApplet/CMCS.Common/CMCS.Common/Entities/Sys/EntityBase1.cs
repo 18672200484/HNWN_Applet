@@ -14,7 +14,7 @@ namespace CMCS.Common.Entities.Sys
         {
             this.Id = Guid.NewGuid().ToString();
             this.CreateDate = DateTime.Now;
-            this.CreateUser = GlobalVars.LoginUser == null ? "" : GlobalVars.LoginUser.UserAccount;
+            this.CreateUser = GlobalVars.LoginUser == null ? "admin" : GlobalVars.LoginUser.UserAccount;
             this.OperDate = this.CreateDate;
             this.OperUser = this.CreateUser;
             this.CreateUserId = "-2";
