@@ -81,6 +81,7 @@ namespace CMCS.Monitor.Win.Frms
 			this.SqlWhere = "where 1=1 ";
 
 			if (!String.IsNullOrEmpty((String)txtUserName.Text)) SqlWhere += " and F_ConsumerName like '%" + txtUserName.Text + "%' ";
+			if (!String.IsNullOrEmpty(txtReaderName.Text)) SqlWhere += " and F_ReaderName like '%" + txtReaderName.Text + "%' ";
 
 			if (!String.IsNullOrEmpty((String)dateTimeInput1.Text))
 			{

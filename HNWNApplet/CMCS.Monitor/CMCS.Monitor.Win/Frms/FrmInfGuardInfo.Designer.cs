@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-			DevComponents.DotNetBar.SuperGrid.GridColumn gridColumn16 = new DevComponents.DotNetBar.SuperGrid.GridColumn();
-			DevComponents.DotNetBar.SuperGrid.GridColumn gridColumn17 = new DevComponents.DotNetBar.SuperGrid.GridColumn();
-			DevComponents.DotNetBar.SuperGrid.GridColumn gridColumn18 = new DevComponents.DotNetBar.SuperGrid.GridColumn();
+			DevComponents.DotNetBar.SuperGrid.GridColumn gridColumn1 = new DevComponents.DotNetBar.SuperGrid.GridColumn();
+			DevComponents.DotNetBar.SuperGrid.GridColumn gridColumn2 = new DevComponents.DotNetBar.SuperGrid.GridColumn();
+			DevComponents.DotNetBar.SuperGrid.GridColumn gridColumn3 = new DevComponents.DotNetBar.SuperGrid.GridColumn();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.txtUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -49,6 +49,8 @@
 			this.btnLast = new DevComponents.DotNetBar.ButtonX();
 			this.btnNext = new DevComponents.DotNetBar.ButtonX();
 			this.lblPagerInfo = new DevComponents.DotNetBar.LabelX();
+			this.txtReaderName = new DevComponents.DotNetBar.Controls.TextBoxX();
+			this.labelX4 = new DevComponents.DotNetBar.LabelX();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -94,6 +96,8 @@
 			// 
 			// panel1
 			// 
+			this.panel1.Controls.Add(this.txtReaderName);
+			this.panel1.Controls.Add(this.labelX4);
 			this.panel1.Controls.Add(this.txtUserName);
 			this.panel1.Controls.Add(this.labelX3);
 			this.panel1.Controls.Add(this.btnSearch);
@@ -120,7 +124,7 @@
 			this.txtUserName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.txtUserName.Font = new System.Drawing.Font("Segoe UI", 11.25F);
 			this.txtUserName.ForeColor = System.Drawing.Color.White;
-			this.txtUserName.Location = new System.Drawing.Point(944, 7);
+			this.txtUserName.Location = new System.Drawing.Point(764, 7);
 			this.txtUserName.Name = "txtUserName";
 			this.txtUserName.Size = new System.Drawing.Size(128, 27);
 			this.txtUserName.TabIndex = 17;
@@ -135,7 +139,7 @@
 			this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.labelX3.Font = new System.Drawing.Font("Segoe UI", 11.25F);
 			this.labelX3.ForeColor = System.Drawing.Color.White;
-			this.labelX3.Location = new System.Drawing.Point(884, 8);
+			this.labelX3.Location = new System.Drawing.Point(704, 8);
 			this.labelX3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.labelX3.Name = "labelX3";
 			this.labelX3.Size = new System.Drawing.Size(56, 24);
@@ -342,26 +346,26 @@
 			this.superGridControl1.Name = "superGridControl1";
 			this.superGridControl1.PrimaryGrid.AutoGenerateColumns = false;
 			this.superGridControl1.PrimaryGrid.Caption.Text = "";
-			gridColumn16.CellStyles.Default.Alignment = DevComponents.DotNetBar.SuperGrid.Style.Alignment.MiddleCenter;
-			gridColumn16.DataPropertyName = "F_ConsumerName";
-			gridColumn16.HeaderText = "用户名";
-			gridColumn16.InfoImageAlignment = DevComponents.DotNetBar.SuperGrid.Style.Alignment.MiddleCenter;
-			gridColumn16.Name = "";
-			gridColumn16.Width = 160;
-			gridColumn17.DataPropertyName = "F_ReaderName";
-			gridColumn17.HeaderText = "门名称";
-			gridColumn17.Name = "";
-			gridColumn17.ResizeMode = DevComponents.DotNetBar.SuperGrid.ColumnResizeMode.MaintainTotalWidth;
-			gridColumn17.Width = 180;
-			gridColumn18.CellStyles.Default.Alignment = DevComponents.DotNetBar.SuperGrid.Style.Alignment.MiddleCenter;
-			gridColumn18.DataPropertyName = "F_ReadDate";
-			gridColumn18.HeaderText = "刷卡时间";
-			gridColumn18.InfoImageAlignment = DevComponents.DotNetBar.SuperGrid.Style.Alignment.MiddleCenter;
-			gridColumn18.Name = "";
-			gridColumn18.Width = 200;
-			this.superGridControl1.PrimaryGrid.Columns.Add(gridColumn16);
-			this.superGridControl1.PrimaryGrid.Columns.Add(gridColumn17);
-			this.superGridControl1.PrimaryGrid.Columns.Add(gridColumn18);
+			gridColumn1.CellStyles.Default.Alignment = DevComponents.DotNetBar.SuperGrid.Style.Alignment.MiddleCenter;
+			gridColumn1.DataPropertyName = "F_ConsumerName";
+			gridColumn1.HeaderText = "用户名";
+			gridColumn1.InfoImageAlignment = DevComponents.DotNetBar.SuperGrid.Style.Alignment.MiddleCenter;
+			gridColumn1.Name = "";
+			gridColumn1.Width = 160;
+			gridColumn2.DataPropertyName = "F_ReaderName";
+			gridColumn2.HeaderText = "门名称";
+			gridColumn2.Name = "";
+			gridColumn2.ResizeMode = DevComponents.DotNetBar.SuperGrid.ColumnResizeMode.MaintainTotalWidth;
+			gridColumn2.Width = 180;
+			gridColumn3.CellStyles.Default.Alignment = DevComponents.DotNetBar.SuperGrid.Style.Alignment.MiddleCenter;
+			gridColumn3.DataPropertyName = "F_ReadDate";
+			gridColumn3.HeaderText = "刷卡时间";
+			gridColumn3.InfoImageAlignment = DevComponents.DotNetBar.SuperGrid.Style.Alignment.MiddleCenter;
+			gridColumn3.Name = "";
+			gridColumn3.Width = 200;
+			this.superGridControl1.PrimaryGrid.Columns.Add(gridColumn1);
+			this.superGridControl1.PrimaryGrid.Columns.Add(gridColumn2);
+			this.superGridControl1.PrimaryGrid.Columns.Add(gridColumn3);
 			this.superGridControl1.PrimaryGrid.SelectionGranularity = DevComponents.DotNetBar.SuperGrid.SelectionGranularity.Row;
 			this.superGridControl1.Size = new System.Drawing.Size(1580, 648);
 			this.superGridControl1.TabIndex = 4;
@@ -471,6 +475,39 @@
 			this.lblPagerInfo.TabIndex = 99;
 			this.lblPagerInfo.Text = "共 0 条记录，每页20 条，共 0 页，当前第 0 页";
 			// 
+			// txtReaderName
+			// 
+			this.txtReaderName.Anchor = System.Windows.Forms.AnchorStyles.Right;
+			this.txtReaderName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
+			// 
+			// 
+			// 
+			this.txtReaderName.Border.Class = "TextBoxBorder";
+			this.txtReaderName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.txtReaderName.Font = new System.Drawing.Font("Segoe UI", 11.25F);
+			this.txtReaderName.ForeColor = System.Drawing.Color.White;
+			this.txtReaderName.Location = new System.Drawing.Point(958, 7);
+			this.txtReaderName.Name = "txtReaderName";
+			this.txtReaderName.Size = new System.Drawing.Size(128, 27);
+			this.txtReaderName.TabIndex = 19;
+			// 
+			// labelX4
+			// 
+			this.labelX4.Anchor = System.Windows.Forms.AnchorStyles.Right;
+			this.labelX4.AutoSize = true;
+			// 
+			// 
+			// 
+			this.labelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.labelX4.Font = new System.Drawing.Font("Segoe UI", 11.25F);
+			this.labelX4.ForeColor = System.Drawing.Color.White;
+			this.labelX4.Location = new System.Drawing.Point(898, 8);
+			this.labelX4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.labelX4.Name = "labelX4";
+			this.labelX4.Size = new System.Drawing.Size(56, 24);
+			this.labelX4.TabIndex = 18;
+			this.labelX4.Text = "门名称";
+			// 
 			// FrmInfGuardInfo
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -523,11 +560,7 @@
         private DevComponents.DotNetBar.ButtonX btnNext;
         private DevComponents.DotNetBar.LabelX labelX3;
         private DevComponents.DotNetBar.Controls.TextBoxX txtUserName;
-
-
-
-
-
-
-    }
+		private DevComponents.DotNetBar.Controls.TextBoxX txtReaderName;
+		private DevComponents.DotNetBar.LabelX labelX4;
+	}
 }

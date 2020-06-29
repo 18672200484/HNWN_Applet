@@ -166,6 +166,12 @@
     <Compile Include="Frms\BaseInfo\EPCCard\FrmEPCCard_Recovery.designer.cs">
       <DependentUpon>FrmEPCCard_Recovery.cs</DependentUpon>
     </Compile>
+    <Compile Include="Frms\BaseInfo\CmequiPment\FrmCmequiPment_List.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frms\BaseInfo\CmequiPment\FrmCmequiPment_List.Designer.cs">
+      <DependentUpon>FrmCmequiPment_List.cs</DependentUpon>
+    </Compile>
     <Compile Include="Frms\BaseInfo\FuelKind\FrmFuelKind_List.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -482,6 +488,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Frms\BaseInfo\EPCCard\FrmEPCCard_Recovery.resx">
       <DependentUpon>FrmEPCCard_Recovery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frms\BaseInfo\CmequiPment\FrmCmequiPment_List.resx">
+      <DependentUpon>FrmCmequiPment_List.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Frms\BaseInfo\FuelKind\FrmFuelKind_List.resx">
       <DependentUpon>FrmFuelKind_List.cs</DependentUpon>

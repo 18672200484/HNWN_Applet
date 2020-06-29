@@ -42,7 +42,17 @@ namespace CMCS.Common.Entities.BaseInfo
             set { _EquipmentCode = value; }
         }
 
-        private string _SampleMachine;
+		private string _NodeCode;
+		/// <summary>
+		/// 编码
+		/// </summary>
+		public string NodeCode
+		{
+			get { return _NodeCode; }
+			set { _NodeCode = value; }
+		}
+		
+		private string _SampleMachine;
         /// <summary>
         /// 厂家名称
         /// </summary>
@@ -52,11 +62,11 @@ namespace CMCS.Common.Entities.BaseInfo
             set { _SampleMachine = value; }
         }
 
-        private string _Sequence;
+        private int _Sequence;
         /// <summary>
         /// 顺序
         /// </summary>
-        public string Sequence
+        public int Sequence
         {
             get { return _Sequence; }
             set { _Sequence = value; }
