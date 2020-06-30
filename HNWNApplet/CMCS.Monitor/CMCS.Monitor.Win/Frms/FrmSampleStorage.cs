@@ -165,16 +165,16 @@ namespace CMCS.Monitor.Win.Frms
 							string cellCode = i.ToString().PadLeft(2, '0') + "G" + j.ToString().PadLeft(2, '0');
 							cellEntity.CellCode = cellCode;
 							IList<InfAutoCupBoard> sampleCell = cellList.Where(a => a.CupBoardCode.Contains(cellCode)).ToList();
-
 							//柜门标识：-1没这一格，0空柜，1已存放，2超期样，3停用
-							if (cellList.Count(a => a.State == 0 && a.CupBoardCode.Contains(cellCode)) == 60)
-								cellEntity.CellFlag = 0;
-							else if (cellList.Count(a => a.State == 1 && a.CupBoardCode.Contains(cellCode)) > 0)
-								cellEntity.CellFlag = 1;
+							if (cellList.Count(a => a.IsValid == "0" && a.CupBoardCode.Contains(cellCode)) == 60)
+								cellEntity.CellFlag = 3;
 							else if (cellList.Count(a => a.State == 1 && a.SaveTime < DateTime.Now.AddDays(-overday) && a.CupBoardCode.Contains(cellCode)) > 0)
 								cellEntity.CellFlag = 2;
-							else if (cellList.Count(a => a.IsValid == "0" && a.CupBoardCode.Contains(cellCode)) == 60)
-								cellEntity.CellFlag = 3;
+							else if (cellList.Count(a => a.State == 1 && a.CupBoardCode.Contains(cellCode)) > 0)
+								cellEntity.CellFlag = 1;
+							else if (cellList.Count(a => a.State == 0 && a.CupBoardCode.Contains(cellCode)) == 60)
+								cellEntity.CellFlag = 0;
+
 							rowEntity.CellList.Add(cellEntity);
 						}
 						rowResult.Add(rowEntity);

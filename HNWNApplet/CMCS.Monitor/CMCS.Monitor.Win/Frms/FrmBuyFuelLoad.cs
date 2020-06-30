@@ -49,6 +49,8 @@ namespace CMCS.Monitor.Win.Frms
 
 		string SqlWhere = string.Empty;
 
+		List<CmcsBuyFuelTransport> list = new List<CmcsBuyFuelTransport>();
+
 		private void FrmBuyFuel_Load(object sender, EventArgs e)
 		{
 			InitForm();
@@ -70,13 +72,9 @@ namespace CMCS.Monitor.Win.Frms
 		public void BindData()
 		{
 			string tempSqlWhere = this.SqlWhere;
-			List<CmcsBuyFuelTransport> list = Dbers.GetInstance().SelfDber.ExecutePager<CmcsBuyFuelTransport>(PageSize, CurrentIndex, tempSqlWhere + " order by InFactoryTime desc");
+			list = Dbers.GetInstance().SelfDber.Entities<CmcsBuyFuelTransport>(tempSqlWhere + " order by InFactoryTime desc");
 
-			GetTotalCount(tempSqlWhere);
 			superGridControl1.PrimaryGrid.DataSource = list;
-			PagerControlStatue();
-
-			lblPagerInfo.Text = string.Format("共 {0} 条记录，每页 {1} 条，共 {2} 页，当前第 {3} 页", TotalCount, PageSize, PageCount, CurrentIndex + 1);
 		}
 
 		private void btnSearch_Click(object sender, EventArgs e)
@@ -108,80 +106,6 @@ namespace CMCS.Monitor.Win.Frms
 			BindData();
 		}
 
-		#region Pager
-
-		private void btnPagerCommand_Click(object sender, EventArgs e)
-		{
-			ButtonX btn = sender as ButtonX;
-			switch (btn.CommandParameter.ToString())
-			{
-				case "First":
-					CurrentIndex = 0;
-					break;
-				case "Previous":
-					CurrentIndex = CurrentIndex - 1;
-					break;
-				case "Next":
-					CurrentIndex = CurrentIndex + 1;
-					break;
-				case "Last":
-					CurrentIndex = PageCount - 1;
-					break;
-			}
-
-			BindData();
-		}
-
-		public void PagerControlStatue()
-		{
-			if (PageCount <= 1)
-			{
-				btnFirst.Enabled = false;
-				btnPrevious.Enabled = false;
-				btnLast.Enabled = false;
-				btnNext.Enabled = false;
-
-				return;
-			}
-
-			if (CurrentIndex == 0)
-			{
-				// 首页
-				btnFirst.Enabled = false;
-				btnPrevious.Enabled = false;
-				btnLast.Enabled = true;
-				btnNext.Enabled = true;
-			}
-
-			if (CurrentIndex > 0 && CurrentIndex < PageCount - 1)
-			{
-				// 上一页/下一页
-				btnFirst.Enabled = true;
-				btnPrevious.Enabled = true;
-				btnLast.Enabled = true;
-				btnNext.Enabled = true;
-			}
-
-			if (CurrentIndex == PageCount - 1)
-			{
-				// 末页
-				btnFirst.Enabled = true;
-				btnPrevious.Enabled = true;
-				btnLast.Enabled = false;
-				btnNext.Enabled = false;
-			}
-		}
-
-		private void GetTotalCount(string sqlWhere)
-		{
-			TotalCount = Dbers.GetInstance().SelfDber.Count<CmcsBuyFuelTransport>(sqlWhere);
-			if (TotalCount % PageSize != 0)
-				PageCount = TotalCount / PageSize + 1;
-			else
-				PageCount = TotalCount / PageSize;
-		}
-		#endregion
-
 		#region SuperGridControl
 
 		private void superGridControl1_GetRowHeaderText(object sender, DevComponents.DotNetBar.SuperGrid.GridGetRowHeaderTextEventArgs e)
@@ -201,20 +125,25 @@ namespace CMCS.Monitor.Win.Frms
 			if (e.GridCell.ColumnIndex == -1 || e.GridCell.GridRow.Index == -1)
 				return;
 
-			CmcsBuyFuelTransport entity = Dbers.GetInstance().SelfDber.Get<CmcsBuyFuelTransport>(superGridControl1.PrimaryGrid.GetCell(e.GridCell.GridRow.Index, superGridControl1.PrimaryGrid.Columns["clmId"].ColumnIndex).Value.ToString());
-			if (entity == null)
-				return;
-			switch (superGridControl1.PrimaryGrid.Columns[e.GridCell.ColumnIndex].Name)
-			{
-				case "clmPic":
-					//抓拍图片
-					break;
-			}
+			//CmcsBuyFuelTransport entity = Dbers.GetInstance().SelfDber.Get<CmcsBuyFuelTransport>(superGridControl1.PrimaryGrid.GetCell(e.GridCell.GridRow.Index, superGridControl1.PrimaryGrid.Columns["clmId"].ColumnIndex).Value.ToString());
+			//if (entity == null)
+			//	return;
+			//switch (superGridControl1.PrimaryGrid.Columns[e.GridCell.ColumnIndex].Name)
+			//{
+			//	case "clmPic":
+			//		//抓拍图片
+			//		break;
+			//}
 		}
 
-		private void superGridControl1_CellValidated(object sender, GridCellValidatedEventArgs e)
+		private void superGridControl1_DataBindingComplete(object sender, GridDataBindingCompleteEventArgs e)
 		{
+			if (list.Count > 0)
+			{
+				object[] sum = new object[11] { "合计", "", "", "", "", "", "车数：" + list.Count, list.Sum(a => a.TicketWeight), list.Sum(a => a.GrossWeight), list.Sum(a => a.TareWeight), list.Sum(a => a.SuttleWeight) };
 
+				this.superGridControl1.PrimaryGrid.Rows.Insert(superGridControl1.PrimaryGrid.Rows.Count, new DevComponents.DotNetBar.SuperGrid.GridRow(sum));
+			}
 		}
 
 		private void superGridControl1_GetCellFormattedValue(object sender, GridGetCellFormattedValueEventArgs e)
