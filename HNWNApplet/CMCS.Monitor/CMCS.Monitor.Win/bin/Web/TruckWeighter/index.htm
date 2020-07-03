@@ -62,7 +62,6 @@
 		function dataHandler(data) {
 			// key_value
 			if (data.Type == 0) {
-
 				$("#" + data.Key).html(data.Value);
 			}
 			// json_data
@@ -81,16 +80,21 @@
 			// svg_visible
 			else if (data.Type == 4) {
 				if (data.Value.toLowerCase() == "true")
-					canvas1.find("*[inkscape\\:label=" + data.Key + "]").show();
+					$(document.getElementById(data.Key)).show();
 				else
-					canvas1.find("*[inkscape\\:label=" + data.Key + "]").hide();
+					$(document.getElementById(data.Key)).hide();
 			}
 			// svg_scare
 			else if (data.Type == 8999) {
+				if (data.Value.toLowerCase() == "1")
+					$(document.getElementById(data.Key)).attr("src", "Resources/images/car_left.png");
+				else
+					$(document.getElementById(data.Key)).attr("src", "Resources/images/car_right.png");
+
 				//if (data.Value.toLowerCase() == "1")
-				//	changeScale(canvas1.find("*[inkscape\\:label=" + data.Key + "]"), true);
+				//	changeScroll(canvas1.find("*[inkscape\\:label=" + data.Key + "]"), 90);
 				//else
-				//	changeScale(canvas1.find("*[inkscape\\:label=" + data.Key + "]"), false);
+				//	changeScroll(canvas1.find("*[inkscape\\:label=" + data.Key + "]"), 180);
 			}
 
 		}
@@ -153,6 +157,46 @@
 				border-color: Red;
 				color: White;
 			}
+
+		.car1 {
+			position: absolute;
+			width: 399px;
+			height: 127px;
+			left: 298px;
+			top: 270px;
+			/*border: 1px red solid;*/
+			background-repeat: no-repeat;
+		}
+
+		.car2 {
+			position: absolute;
+			width: 399px;
+			height: 127px;
+			left: 1198px;
+			top: 270px;
+			/*border: 1px red solid;*/
+			background-repeat: no-repeat;
+		}
+
+		.car3 {
+			position: absolute;
+			width: 399px;
+			height: 127px;
+			left: 298px;
+			top: 725px;
+			/*border: 1px red solid;*/
+			background-repeat: no-repeat;
+		}
+
+		.car4 {
+			position: absolute;
+			width: 399px;
+			height: 127px;
+			left: 1198px;
+			top: 725px;
+			/*border: 1px red solid;*/
+			background-repeat: no-repeat;
+		}
 	</style>
 </head>
 <body onload="initpage();" onselectstart="return false;">
@@ -165,6 +209,11 @@
 			left: 1500px;" onclick="gate2Up();" />
 		<input type="button" id="btnGate2Down" value="降 杆" class="button1" style="top: 550px;
 			left: 1500px;" onclick="gate2Down();" />-->
+		<img id="#1汽车衡_卡车" class="car1" />
+		<img id="#2汽车衡_卡车" class="car2" />
+		<img id="#3汽车衡_卡车" class="car3" />
+		<img id="#4汽车衡_卡车" class="car4" />
+
 		<embed id="svgCanvas1" src="Resources/TruckWeighter.svg" type="image/svg+xml" />
 	</div>
 </body>

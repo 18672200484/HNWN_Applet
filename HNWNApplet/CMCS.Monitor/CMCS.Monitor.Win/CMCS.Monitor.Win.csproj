@@ -434,6 +434,8 @@
     <Content Include="bin\Web\TrainBeltSampler\Resources\js\register.js" />
     <Content Include="bin\Web\TrainBeltSampler\Resources\TrainBeltSampler.svg" />
     <Content Include="bin\Web\TruckWeighter\index.htm" />
+    <Content Include="bin\Web\TruckWeighter\Resources\images\car_left.png" />
+    <Content Include="bin\Web\TruckWeighter\Resources\images\car_right.png" />
     <Content Include="bin\Web\TruckWeighter\Resources\js\register.js" />
     <Content Include="bin\Web\TruckWeighter\Resources\TruckWeighter.svg" />
     <Content Include="bin\Web\WeightBridge\hanfeng_smck.svg" />
@@ -447,7 +449,6 @@
     <Folder Include="bin\Web\AssayManage\Resources\js\" />
     <Folder Include="bin\Web\HomePage\Resources\images\" />
     <Folder Include="bin\Web\Resources\images\" />
-    <Folder Include="bin\Web\TruckWeighter\Resources\images\" />
     <Folder Include="Views\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
