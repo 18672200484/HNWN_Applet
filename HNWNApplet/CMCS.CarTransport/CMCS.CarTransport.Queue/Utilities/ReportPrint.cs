@@ -155,7 +155,7 @@ namespace CMCS.CarTransport.Queue
 
             //声明PrintDocument对象用于数据的打印
             PrintDocument printDoc = new PrintDocument();
-            printDoc.DefaultPageSettings.PaperSize = new PaperSize("Custum", 900, 360);
+            printDoc.DefaultPageSettings.PaperSize = new PaperSize("Custum", 900, 367);
 
             //声明PrintDocument对象的PrintPage事件，具体的打印操作需要在这个事件中处理。
             printDoc.PrintPage += new PrintPageEventHandler(PrintPage);
