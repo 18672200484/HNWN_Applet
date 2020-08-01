@@ -1822,11 +1822,15 @@ namespace CMCS.CarTransport.Weighter.Frms
                     btnSaveTransport_BuyFuel.Enabled = false;
                     this.CurrentFlowFlag = eFlowFlag.等待离开;
 
-                    UpdateLedShow("称重完毕", "请下磅,重量" + Hardwarer.Wber.Weight + "吨");
-                    this.voiceSpeaker.Speak("称重完毕请下磅", 1, false);
-
                     LoadTodayUnFinishBuyFuelTransport();
                     LoadTodayFinishBuyFuelTransport();
+
+                    if (this.CurrentBuyFuelTransport.StepName == eTruckInFactoryStep.重车.ToString())
+                        UpdateLedShow("称重完毕", "请下磅,重量" + Weight + "吨");
+                    else if (this.CurrentBuyFuelTransport.StepName == eTruckInFactoryStep.轻车.ToString())
+                        UpdateLedShow("称重完毕", "请下磅,净重" + this.CurrentBuyFuelTransport.SuttleWeight + "吨");
+
+                    this.voiceSpeaker.Speak("称重完毕请下磅", 1, false);
 
                     CamareCapturePicture(this.CurrentBuyFuelTransport.Id);
 

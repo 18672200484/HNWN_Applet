@@ -114,10 +114,12 @@ namespace CMCS.CarTransport.DAO
                 transport.TareWeight = weight;
                 transport.TarePlace = place;
                 transport.TareTime = dt;
-
-                //扣吨量从中矿获取
-                //transport.DeductWeight = GetDeductWeight(transport.Id);
                 transport.DeductWeight = deductWeight;
+
+                //净重大于票重以票重为准
+                if (transport.GrossWeight - weight > transport.TicketWeight)
+                    transport.TareWeight = transport.GrossWeight - transport.TicketWeight;
+
                 transport.SuttleWeight = transport.GrossWeight - transport.TareWeight - transport.DeductWeight;
 
                 //卸煤点信息
