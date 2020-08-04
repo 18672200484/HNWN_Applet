@@ -10,6 +10,7 @@ using CMCS.Common.Entities;
 using CMCS.Common.Views;
 using CMCS.DapperDber.Util;
 using CMCS.Common.Enums;
+using CMCS.Common.Utilities;
 
 namespace CMCS.CarTransport.DAO
 {
@@ -66,13 +67,42 @@ namespace CMCS.CarTransport.DAO
         /// <summary>
         /// 保存入厂煤运输记录
         /// </summary>
-        /// <param name="transportId"></param> 
-        /// <param name="dt"></param>
+        /// <param name="transportId">当前运输记录id</param>
+        /// <param name="deductWeight">扣吨量</param>
+        /// <param name="catagory">卸煤点信息</param>
+        /// <param name="isOutFactoryITMS">是否启用出厂智能调运天线</param>
+        /// <param name="dt">当前时间</param>
         /// <returns></returns>
-        public bool SaveBuyFuelTransport(string transportId, DateTime dt)
+        public bool SaveBuyFuelTransport(string transportId, decimal deductWeight, string catagory, bool isOutFactoryITMS, DateTime dt)
         {
             CmcsBuyFuelTransport transport = SelfDber.Get<CmcsBuyFuelTransport>(transportId);
             if (transport == null) return false;
+
+            if (isOutFactoryITMS)
+            {
+                if (deductWeight > 0)
+                {
+                    transport.DeductWeight = deductWeight;
+
+                    //净重大于票重以票重为准
+                    if (transport.GrossWeight - transport.TareWeight > transport.TicketWeight)
+                        transport.TareWeight = transport.GrossWeight - transport.TicketWeight;
+
+                    transport.SuttleWeight = transport.GrossWeight - transport.TareWeight - transport.DeductWeight;
+                }
+
+                //卸煤点信息
+                try
+                {
+                    if (!string.IsNullOrWhiteSpace(catagory))
+                    {
+                        string xmd = catagory.Substring(catagory.Length - 1, 1);
+                        transport.UnLoadArea = xmd == "1" ? "南煤场东段" : (xmd == "2" ? "南煤场西段" : (xmd == "3" ? "北煤场东段" : (xmd == "4" ? "北煤场西段" : "卸煤沟")));
+                    }
+                }
+                catch (Exception ex) { Log4Neter.Error("卸煤点解析错误", ex); }
+                transport.Catagory = catagory;
+            }
 
             transport.StepName = eTruckInFactoryStep.出厂.ToString();
             transport.OutFactoryTime = dt;

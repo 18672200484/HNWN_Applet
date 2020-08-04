@@ -209,7 +209,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>华能渭南热电有限公司过磅单</Value>
+                <Value>华能陕西渭南热电有限公司过磅单</Value>
                 <Style>
                   <FontFamily>微软雅黑</FontFamily>
                   <FontSize>16pt</FontSize>
@@ -223,9 +223,9 @@
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>1.33351cm</Top>
-        <Left>6.4125cm</Left>
+        <Left>5.73781cm</Left>
         <Height>0.83113cm</Height>
-        <Width>7.67501cm</Width>
+        <Width>9.02439cm</Width>
         <Style>
           <Border>
             <Style>None</Style>

@@ -35,6 +35,30 @@ namespace CMCS.CarTransport.Queue.Frms
             this.btnCancel = new DevComponents.DotNetBar.ButtonX();
             this.panelEx2 = new DevComponents.DotNetBar.PanelEx();
             this.tabControl1 = new DevComponents.DotNetBar.TabControl();
+            this.tabControlPanel6 = new DevComponents.DotNetBar.TabControlPanel();
+            this.chkTareCoefficient = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.labelX26 = new DevComponents.DotNetBar.LabelX();
+            this.txtTareCoefficient = new DevComponents.Editors.DoubleInput();
+            this.chkPaperWorkPass = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.chkSampleWayCount = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.chkFactoryCount = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.chkTicketDiff = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.labelX24 = new DevComponents.DotNetBar.LabelX();
+            this.txtTicketDiff = new DevComponents.Editors.DoubleInput();
+            this.chkITMS = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.chkAutoPrint = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.dbiSampleWayCount = new DevComponents.Editors.IntegerInput();
+            this.labelX12 = new DevComponents.DotNetBar.LabelX();
+            this.dbiFactoryCount = new DevComponents.Editors.IntegerInput();
+            this.labelX13 = new DevComponents.DotNetBar.LabelX();
+            this.tabItem6 = new DevComponents.DotNetBar.TabItem(this.components);
+            this.tabControlPanel1 = new DevComponents.DotNetBar.TabControlPanel();
+            this.txtSelfConnStr = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.labelX20 = new DevComponents.DotNetBar.LabelX();
+            this.chbStartup = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.txtAppIdentifier = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.labelX4 = new DevComponents.DotNetBar.LabelX();
+            this.tabItem1 = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabControlPanel4 = new DevComponents.DotNetBar.TabControlPanel();
             this.labelX23 = new DevComponents.DotNetBar.LabelX();
             this.cmbRwer2Port = new DevComponents.Editors.IntegerInput();
@@ -87,27 +111,6 @@ namespace CMCS.CarTransport.Queue.Frms
             this.cmbIocerCom = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.labelX2 = new DevComponents.DotNetBar.LabelX();
             this.tabItem2 = new DevComponents.DotNetBar.TabItem(this.components);
-            this.tabControlPanel1 = new DevComponents.DotNetBar.TabControlPanel();
-            this.txtSelfConnStr = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.labelX20 = new DevComponents.DotNetBar.LabelX();
-            this.chbStartup = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.txtAppIdentifier = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.labelX4 = new DevComponents.DotNetBar.LabelX();
-            this.tabItem1 = new DevComponents.DotNetBar.TabItem(this.components);
-            this.tabControlPanel6 = new DevComponents.DotNetBar.TabControlPanel();
-            this.chkPaperWorkPass = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.chkSampleWayCount = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.chkFactoryCount = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.chkTicketDiff = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.labelX24 = new DevComponents.DotNetBar.LabelX();
-            this.txtTicketDiff = new DevComponents.Editors.DoubleInput();
-            this.chkITMS = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.chkAutoPrint = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.dbiSampleWayCount = new DevComponents.Editors.IntegerInput();
-            this.labelX12 = new DevComponents.DotNetBar.LabelX();
-            this.dbiFactoryCount = new DevComponents.Editors.IntegerInput();
-            this.labelX13 = new DevComponents.DotNetBar.LabelX();
-            this.tabItem6 = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabControlPanel3 = new DevComponents.DotNetBar.TabControlPanel();
             this.lblVoiceVolume = new DevComponents.DotNetBar.LabelX();
             this.lblVoiceRate = new DevComponents.DotNetBar.LabelX();
@@ -119,14 +122,20 @@ namespace CMCS.CarTransport.Queue.Frms
             this.cmbVoiceName = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.labelX31 = new DevComponents.DotNetBar.LabelX();
             this.tabItem3 = new DevComponents.DotNetBar.TabItem(this.components);
-            this.chkTareCoefficient = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.labelX26 = new DevComponents.DotNetBar.LabelX();
-            this.txtTareCoefficient = new DevComponents.Editors.DoubleInput();
+            this.chkOutFactoryITMS = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.labelX35 = new DevComponents.DotNetBar.LabelX();
+            this.intPoundIndex = new DevComponents.Editors.IntegerInput();
             this.tableLayoutPanel1.SuspendLayout();
             this.panelEx1.SuspendLayout();
             this.panelEx2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
             this.tabControl1.SuspendLayout();
+            this.tabControlPanel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTareCoefficient)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTicketDiff)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dbiSampleWayCount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dbiFactoryCount)).BeginInit();
+            this.tabControlPanel1.SuspendLayout();
             this.tabControlPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cmbRwer2Port)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbRwer2Ip)).BeginInit();
@@ -136,13 +145,8 @@ namespace CMCS.CarTransport.Queue.Frms
             ((System.ComponentModel.ISupportInitialize)(this.iptxtLED2IP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iptxtLED1IP)).BeginInit();
             this.tabControlPanel2.SuspendLayout();
-            this.tabControlPanel1.SuspendLayout();
-            this.tabControlPanel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTicketDiff)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dbiSampleWayCount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dbiFactoryCount)).BeginInit();
             this.tabControlPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTareCoefficient)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.intPoundIndex)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -248,8 +252,8 @@ namespace CMCS.CarTransport.Queue.Frms
             this.tabControl1.ColorScheme.TabItemSelectedBorderDark = System.Drawing.Color.FromArgb(((int)(((byte)(172)))), ((int)(((byte)(188)))), ((int)(((byte)(204)))));
             this.tabControl1.ColorScheme.TabItemSelectedBorderLight = System.Drawing.Color.FromArgb(((int)(((byte)(172)))), ((int)(((byte)(188)))), ((int)(((byte)(204)))));
             this.tabControl1.ColorScheme.TabPanelBorder = System.Drawing.Color.Empty;
-            this.tabControl1.Controls.Add(this.tabControlPanel6);
             this.tabControl1.Controls.Add(this.tabControlPanel1);
+            this.tabControl1.Controls.Add(this.tabControlPanel6);
             this.tabControl1.Controls.Add(this.tabControlPanel4);
             this.tabControl1.Controls.Add(this.tabControlPanel5);
             this.tabControl1.Controls.Add(this.tabControlPanel2);
@@ -272,6 +276,407 @@ namespace CMCS.CarTransport.Queue.Frms
             this.tabControl1.Tabs.Add(this.tabItem3);
             this.tabControl1.Tabs.Add(this.tabItem6);
             this.tabControl1.TabStop = false;
+            // 
+            // tabControlPanel6
+            // 
+            this.tabControlPanel6.Controls.Add(this.chkOutFactoryITMS);
+            this.tabControlPanel6.Controls.Add(this.chkTareCoefficient);
+            this.tabControlPanel6.Controls.Add(this.labelX26);
+            this.tabControlPanel6.Controls.Add(this.txtTareCoefficient);
+            this.tabControlPanel6.Controls.Add(this.chkPaperWorkPass);
+            this.tabControlPanel6.Controls.Add(this.chkSampleWayCount);
+            this.tabControlPanel6.Controls.Add(this.chkFactoryCount);
+            this.tabControlPanel6.Controls.Add(this.chkTicketDiff);
+            this.tabControlPanel6.Controls.Add(this.labelX24);
+            this.tabControlPanel6.Controls.Add(this.txtTicketDiff);
+            this.tabControlPanel6.Controls.Add(this.chkITMS);
+            this.tabControlPanel6.Controls.Add(this.chkAutoPrint);
+            this.tabControlPanel6.Controls.Add(this.dbiSampleWayCount);
+            this.tabControlPanel6.Controls.Add(this.labelX12);
+            this.tabControlPanel6.Controls.Add(this.dbiFactoryCount);
+            this.tabControlPanel6.Controls.Add(this.labelX13);
+            this.tabControlPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlPanel6.Location = new System.Drawing.Point(0, 31);
+            this.tabControlPanel6.Name = "tabControlPanel6";
+            this.tabControlPanel6.Padding = new System.Windows.Forms.Padding(1);
+            this.tabControlPanel6.Size = new System.Drawing.Size(703, 432);
+            this.tabControlPanel6.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
+            this.tabControlPanel6.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabControlPanel6.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
+            | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabControlPanel6.Style.GradientAngle = 90;
+            this.tabControlPanel6.TabIndex = 7;
+            this.tabControlPanel6.TabItem = this.tabItem6;
+            // 
+            // chkTareCoefficient
+            // 
+            this.chkTareCoefficient.AutoSize = true;
+            this.chkTareCoefficient.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.chkTareCoefficient.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.chkTareCoefficient.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkTareCoefficient.ForeColor = System.Drawing.Color.White;
+            this.chkTareCoefficient.Location = new System.Drawing.Point(330, 179);
+            this.chkTareCoefficient.Name = "chkTareCoefficient";
+            this.chkTareCoefficient.Size = new System.Drawing.Size(59, 24);
+            this.chkTareCoefficient.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.chkTareCoefficient.TabIndex = 167;
+            this.chkTareCoefficient.Text = "启用";
+            // 
+            // labelX26
+            // 
+            this.labelX26.AutoSize = true;
+            this.labelX26.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX26.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX26.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelX26.ForeColor = System.Drawing.Color.White;
+            this.labelX26.Location = new System.Drawing.Point(97, 179);
+            this.labelX26.Name = "labelX26";
+            this.labelX26.Size = new System.Drawing.Size(101, 24);
+            this.labelX26.TabIndex = 166;
+            this.labelX26.Text = "皮重排查系数";
+            // 
+            // txtTareCoefficient
+            // 
+            this.txtTareCoefficient.AllowEmptyState = false;
+            this.txtTareCoefficient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
+            // 
+            // 
+            // 
+            this.txtTareCoefficient.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.txtTareCoefficient.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtTareCoefficient.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.txtTareCoefficient.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.txtTareCoefficient.ForeColor = System.Drawing.Color.White;
+            this.txtTareCoefficient.Increment = 1D;
+            this.txtTareCoefficient.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left;
+            this.txtTareCoefficient.Location = new System.Drawing.Point(206, 177);
+            this.txtTareCoefficient.MaxValue = 1000D;
+            this.txtTareCoefficient.MinValue = 0D;
+            this.txtTareCoefficient.Name = "txtTareCoefficient";
+            this.txtTareCoefficient.Size = new System.Drawing.Size(116, 29);
+            this.txtTareCoefficient.TabIndex = 165;
+            // 
+            // chkPaperWorkPass
+            // 
+            this.chkPaperWorkPass.AutoSize = true;
+            this.chkPaperWorkPass.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.chkPaperWorkPass.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.chkPaperWorkPass.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkPaperWorkPass.ForeColor = System.Drawing.Color.White;
+            this.chkPaperWorkPass.Location = new System.Drawing.Point(206, 291);
+            this.chkPaperWorkPass.Name = "chkPaperWorkPass";
+            this.chkPaperWorkPass.Size = new System.Drawing.Size(121, 24);
+            this.chkPaperWorkPass.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.chkPaperWorkPass.TabIndex = 164;
+            this.chkPaperWorkPass.Text = "启用证件到期";
+            // 
+            // chkSampleWayCount
+            // 
+            this.chkSampleWayCount.AutoSize = true;
+            this.chkSampleWayCount.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.chkSampleWayCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.chkSampleWayCount.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkSampleWayCount.ForeColor = System.Drawing.Color.White;
+            this.chkSampleWayCount.Location = new System.Drawing.Point(330, 35);
+            this.chkSampleWayCount.Name = "chkSampleWayCount";
+            this.chkSampleWayCount.Size = new System.Drawing.Size(59, 24);
+            this.chkSampleWayCount.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.chkSampleWayCount.TabIndex = 163;
+            this.chkSampleWayCount.Text = "启用";
+            // 
+            // chkFactoryCount
+            // 
+            this.chkFactoryCount.AutoSize = true;
+            this.chkFactoryCount.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.chkFactoryCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.chkFactoryCount.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkFactoryCount.ForeColor = System.Drawing.Color.White;
+            this.chkFactoryCount.Location = new System.Drawing.Point(330, 81);
+            this.chkFactoryCount.Name = "chkFactoryCount";
+            this.chkFactoryCount.Size = new System.Drawing.Size(59, 24);
+            this.chkFactoryCount.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.chkFactoryCount.TabIndex = 162;
+            this.chkFactoryCount.Text = "启用";
+            // 
+            // chkTicketDiff
+            // 
+            this.chkTicketDiff.AutoSize = true;
+            this.chkTicketDiff.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.chkTicketDiff.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.chkTicketDiff.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkTicketDiff.ForeColor = System.Drawing.Color.White;
+            this.chkTicketDiff.Location = new System.Drawing.Point(330, 129);
+            this.chkTicketDiff.Name = "chkTicketDiff";
+            this.chkTicketDiff.Size = new System.Drawing.Size(59, 24);
+            this.chkTicketDiff.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.chkTicketDiff.TabIndex = 161;
+            this.chkTicketDiff.Text = "启用";
+            // 
+            // labelX24
+            // 
+            this.labelX24.AutoSize = true;
+            this.labelX24.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX24.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX24.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelX24.ForeColor = System.Drawing.Color.White;
+            this.labelX24.Location = new System.Drawing.Point(97, 129);
+            this.labelX24.Name = "labelX24";
+            this.labelX24.Size = new System.Drawing.Size(101, 24);
+            this.labelX24.TabIndex = 160;
+            this.labelX24.Text = "净重超差限值";
+            // 
+            // txtTicketDiff
+            // 
+            this.txtTicketDiff.AllowEmptyState = false;
+            this.txtTicketDiff.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
+            // 
+            // 
+            // 
+            this.txtTicketDiff.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.txtTicketDiff.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtTicketDiff.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.txtTicketDiff.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.txtTicketDiff.ForeColor = System.Drawing.Color.White;
+            this.txtTicketDiff.Increment = 1D;
+            this.txtTicketDiff.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left;
+            this.txtTicketDiff.Location = new System.Drawing.Point(206, 127);
+            this.txtTicketDiff.MaxValue = 1000D;
+            this.txtTicketDiff.MinValue = 0D;
+            this.txtTicketDiff.Name = "txtTicketDiff";
+            this.txtTicketDiff.Size = new System.Drawing.Size(116, 29);
+            this.txtTicketDiff.TabIndex = 159;
+            // 
+            // chkITMS
+            // 
+            this.chkITMS.AutoSize = true;
+            this.chkITMS.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.chkITMS.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.chkITMS.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkITMS.ForeColor = System.Drawing.Color.White;
+            this.chkITMS.Location = new System.Drawing.Point(206, 256);
+            this.chkITMS.Name = "chkITMS";
+            this.chkITMS.Size = new System.Drawing.Size(121, 24);
+            this.chkITMS.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.chkITMS.TabIndex = 158;
+            this.chkITMS.Text = "启用智能调运";
+            // 
+            // chkAutoPrint
+            // 
+            this.chkAutoPrint.AutoSize = true;
+            this.chkAutoPrint.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.chkAutoPrint.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.chkAutoPrint.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkAutoPrint.ForeColor = System.Drawing.Color.White;
+            this.chkAutoPrint.Location = new System.Drawing.Point(206, 221);
+            this.chkAutoPrint.Name = "chkAutoPrint";
+            this.chkAutoPrint.Size = new System.Drawing.Size(121, 24);
+            this.chkAutoPrint.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.chkAutoPrint.TabIndex = 157;
+            this.chkAutoPrint.Text = "自动打印磅单";
+            // 
+            // dbiSampleWayCount
+            // 
+            this.dbiSampleWayCount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
+            // 
+            // 
+            // 
+            this.dbiSampleWayCount.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.dbiSampleWayCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.dbiSampleWayCount.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.dbiSampleWayCount.ForeColor = System.Drawing.Color.White;
+            this.dbiSampleWayCount.Location = new System.Drawing.Point(206, 34);
+            this.dbiSampleWayCount.Name = "dbiSampleWayCount";
+            this.dbiSampleWayCount.ShowUpDown = true;
+            this.dbiSampleWayCount.Size = new System.Drawing.Size(116, 27);
+            this.dbiSampleWayCount.TabIndex = 156;
+            // 
+            // labelX12
+            // 
+            this.labelX12.AutoSize = true;
+            this.labelX12.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX12.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX12.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelX12.ForeColor = System.Drawing.Color.White;
+            this.labelX12.Location = new System.Drawing.Point(102, 35);
+            this.labelX12.Name = "labelX12";
+            this.labelX12.Size = new System.Drawing.Size(101, 24);
+            this.labelX12.TabIndex = 155;
+            this.labelX12.Text = "采样通道车数";
+            // 
+            // dbiFactoryCount
+            // 
+            this.dbiFactoryCount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
+            // 
+            // 
+            // 
+            this.dbiFactoryCount.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.dbiFactoryCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.dbiFactoryCount.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.dbiFactoryCount.ForeColor = System.Drawing.Color.White;
+            this.dbiFactoryCount.Location = new System.Drawing.Point(206, 80);
+            this.dbiFactoryCount.Name = "dbiFactoryCount";
+            this.dbiFactoryCount.ShowUpDown = true;
+            this.dbiFactoryCount.Size = new System.Drawing.Size(116, 27);
+            this.dbiFactoryCount.TabIndex = 154;
+            // 
+            // labelX13
+            // 
+            this.labelX13.AutoSize = true;
+            this.labelX13.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX13.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX13.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelX13.ForeColor = System.Drawing.Color.White;
+            this.labelX13.Location = new System.Drawing.Point(118, 81);
+            this.labelX13.Name = "labelX13";
+            this.labelX13.Size = new System.Drawing.Size(85, 24);
+            this.labelX13.TabIndex = 153;
+            this.labelX13.Text = "厂内总车数";
+            // 
+            // tabItem6
+            // 
+            this.tabItem6.AttachedControl = this.tabControlPanel6;
+            this.tabItem6.Name = "tabItem6";
+            this.tabItem6.Text = "公共配置";
+            // 
+            // tabControlPanel1
+            // 
+            this.tabControlPanel1.Controls.Add(this.labelX35);
+            this.tabControlPanel1.Controls.Add(this.intPoundIndex);
+            this.tabControlPanel1.Controls.Add(this.txtSelfConnStr);
+            this.tabControlPanel1.Controls.Add(this.labelX20);
+            this.tabControlPanel1.Controls.Add(this.chbStartup);
+            this.tabControlPanel1.Controls.Add(this.txtAppIdentifier);
+            this.tabControlPanel1.Controls.Add(this.labelX4);
+            this.tabControlPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlPanel1.Location = new System.Drawing.Point(0, 31);
+            this.tabControlPanel1.Name = "tabControlPanel1";
+            this.tabControlPanel1.Padding = new System.Windows.Forms.Padding(1);
+            this.tabControlPanel1.Size = new System.Drawing.Size(703, 432);
+            this.tabControlPanel1.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
+            this.tabControlPanel1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabControlPanel1.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
+            | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabControlPanel1.Style.GradientAngle = 90;
+            this.tabControlPanel1.TabIndex = 1;
+            this.tabControlPanel1.TabItem = this.tabItem1;
+            // 
+            // txtSelfConnStr
+            // 
+            this.txtSelfConnStr.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
+            // 
+            // 
+            // 
+            this.txtSelfConnStr.Border.Class = "TextBoxBorder";
+            this.txtSelfConnStr.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtSelfConnStr.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSelfConnStr.ForeColor = System.Drawing.Color.White;
+            this.txtSelfConnStr.Location = new System.Drawing.Point(167, 67);
+            this.txtSelfConnStr.Name = "txtSelfConnStr";
+            this.txtSelfConnStr.Size = new System.Drawing.Size(446, 27);
+            this.txtSelfConnStr.TabIndex = 20;
+            // 
+            // labelX20
+            // 
+            this.labelX20.AutoSize = true;
+            this.labelX20.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX20.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX20.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelX20.ForeColor = System.Drawing.Color.White;
+            this.labelX20.Location = new System.Drawing.Point(30, 69);
+            this.labelX20.Name = "labelX20";
+            this.labelX20.Size = new System.Drawing.Size(132, 24);
+            this.labelX20.TabIndex = 19;
+            this.labelX20.Text = "数据库连接字符串";
+            // 
+            // chbStartup
+            // 
+            this.chbStartup.AutoSize = true;
+            this.chbStartup.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.chbStartup.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.chbStartup.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chbStartup.ForeColor = System.Drawing.Color.White;
+            this.chbStartup.Location = new System.Drawing.Point(167, 145);
+            this.chbStartup.Name = "chbStartup";
+            this.chbStartup.Size = new System.Drawing.Size(90, 24);
+            this.chbStartup.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.chbStartup.TabIndex = 18;
+            this.chbStartup.Text = "开机启动";
+            // 
+            // txtAppIdentifier
+            // 
+            this.txtAppIdentifier.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
+            // 
+            // 
+            // 
+            this.txtAppIdentifier.Border.Class = "TextBoxBorder";
+            this.txtAppIdentifier.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtAppIdentifier.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAppIdentifier.ForeColor = System.Drawing.Color.White;
+            this.txtAppIdentifier.Location = new System.Drawing.Point(167, 29);
+            this.txtAppIdentifier.Name = "txtAppIdentifier";
+            this.txtAppIdentifier.Size = new System.Drawing.Size(180, 27);
+            this.txtAppIdentifier.TabIndex = 17;
+            // 
+            // labelX4
+            // 
+            this.labelX4.AutoSize = true;
+            this.labelX4.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX4.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelX4.ForeColor = System.Drawing.Color.White;
+            this.labelX4.Location = new System.Drawing.Point(61, 31);
+            this.labelX4.Name = "labelX4";
+            this.labelX4.Size = new System.Drawing.Size(101, 24);
+            this.labelX4.TabIndex = 16;
+            this.labelX4.Text = "程序唯一标识";
+            // 
+            // tabItem1
+            // 
+            this.tabItem1.AttachedControl = this.tabControlPanel1;
+            this.tabItem1.Name = "tabItem1";
+            this.tabItem1.Text = "基础设置";
             // 
             // tabControlPanel4
             // 
@@ -1108,350 +1513,6 @@ namespace CMCS.CarTransport.Queue.Frms
             this.tabItem2.Name = "tabItem2";
             this.tabItem2.Text = "IO控制器";
             // 
-            // tabControlPanel1
-            // 
-            this.tabControlPanel1.Controls.Add(this.txtSelfConnStr);
-            this.tabControlPanel1.Controls.Add(this.labelX20);
-            this.tabControlPanel1.Controls.Add(this.chbStartup);
-            this.tabControlPanel1.Controls.Add(this.txtAppIdentifier);
-            this.tabControlPanel1.Controls.Add(this.labelX4);
-            this.tabControlPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlPanel1.Location = new System.Drawing.Point(0, 31);
-            this.tabControlPanel1.Name = "tabControlPanel1";
-            this.tabControlPanel1.Padding = new System.Windows.Forms.Padding(1);
-            this.tabControlPanel1.Size = new System.Drawing.Size(703, 432);
-            this.tabControlPanel1.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
-            this.tabControlPanel1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabControlPanel1.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
-            | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabControlPanel1.Style.GradientAngle = 90;
-            this.tabControlPanel1.TabIndex = 1;
-            this.tabControlPanel1.TabItem = this.tabItem1;
-            // 
-            // txtSelfConnStr
-            // 
-            this.txtSelfConnStr.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
-            // 
-            // 
-            // 
-            this.txtSelfConnStr.Border.Class = "TextBoxBorder";
-            this.txtSelfConnStr.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtSelfConnStr.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSelfConnStr.ForeColor = System.Drawing.Color.White;
-            this.txtSelfConnStr.Location = new System.Drawing.Point(167, 67);
-            this.txtSelfConnStr.Name = "txtSelfConnStr";
-            this.txtSelfConnStr.Size = new System.Drawing.Size(446, 27);
-            this.txtSelfConnStr.TabIndex = 20;
-            // 
-            // labelX20
-            // 
-            this.labelX20.AutoSize = true;
-            this.labelX20.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX20.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX20.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelX20.ForeColor = System.Drawing.Color.White;
-            this.labelX20.Location = new System.Drawing.Point(30, 69);
-            this.labelX20.Name = "labelX20";
-            this.labelX20.Size = new System.Drawing.Size(132, 24);
-            this.labelX20.TabIndex = 19;
-            this.labelX20.Text = "数据库连接字符串";
-            // 
-            // chbStartup
-            // 
-            this.chbStartup.AutoSize = true;
-            this.chbStartup.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.chbStartup.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chbStartup.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chbStartup.ForeColor = System.Drawing.Color.White;
-            this.chbStartup.Location = new System.Drawing.Point(167, 105);
-            this.chbStartup.Name = "chbStartup";
-            this.chbStartup.Size = new System.Drawing.Size(90, 24);
-            this.chbStartup.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.chbStartup.TabIndex = 18;
-            this.chbStartup.Text = "开机启动";
-            // 
-            // txtAppIdentifier
-            // 
-            this.txtAppIdentifier.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
-            // 
-            // 
-            // 
-            this.txtAppIdentifier.Border.Class = "TextBoxBorder";
-            this.txtAppIdentifier.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtAppIdentifier.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAppIdentifier.ForeColor = System.Drawing.Color.White;
-            this.txtAppIdentifier.Location = new System.Drawing.Point(167, 29);
-            this.txtAppIdentifier.Name = "txtAppIdentifier";
-            this.txtAppIdentifier.Size = new System.Drawing.Size(180, 27);
-            this.txtAppIdentifier.TabIndex = 17;
-            // 
-            // labelX4
-            // 
-            this.labelX4.AutoSize = true;
-            this.labelX4.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX4.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelX4.ForeColor = System.Drawing.Color.White;
-            this.labelX4.Location = new System.Drawing.Point(61, 31);
-            this.labelX4.Name = "labelX4";
-            this.labelX4.Size = new System.Drawing.Size(101, 24);
-            this.labelX4.TabIndex = 16;
-            this.labelX4.Text = "程序唯一标识";
-            // 
-            // tabItem1
-            // 
-            this.tabItem1.AttachedControl = this.tabControlPanel1;
-            this.tabItem1.Name = "tabItem1";
-            this.tabItem1.Text = "基础设置";
-            // 
-            // tabControlPanel6
-            // 
-            this.tabControlPanel6.Controls.Add(this.chkTareCoefficient);
-            this.tabControlPanel6.Controls.Add(this.labelX26);
-            this.tabControlPanel6.Controls.Add(this.txtTareCoefficient);
-            this.tabControlPanel6.Controls.Add(this.chkPaperWorkPass);
-            this.tabControlPanel6.Controls.Add(this.chkSampleWayCount);
-            this.tabControlPanel6.Controls.Add(this.chkFactoryCount);
-            this.tabControlPanel6.Controls.Add(this.chkTicketDiff);
-            this.tabControlPanel6.Controls.Add(this.labelX24);
-            this.tabControlPanel6.Controls.Add(this.txtTicketDiff);
-            this.tabControlPanel6.Controls.Add(this.chkITMS);
-            this.tabControlPanel6.Controls.Add(this.chkAutoPrint);
-            this.tabControlPanel6.Controls.Add(this.dbiSampleWayCount);
-            this.tabControlPanel6.Controls.Add(this.labelX12);
-            this.tabControlPanel6.Controls.Add(this.dbiFactoryCount);
-            this.tabControlPanel6.Controls.Add(this.labelX13);
-            this.tabControlPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlPanel6.Location = new System.Drawing.Point(0, 31);
-            this.tabControlPanel6.Name = "tabControlPanel6";
-            this.tabControlPanel6.Padding = new System.Windows.Forms.Padding(1);
-            this.tabControlPanel6.Size = new System.Drawing.Size(703, 432);
-            this.tabControlPanel6.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
-            this.tabControlPanel6.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabControlPanel6.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
-            | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabControlPanel6.Style.GradientAngle = 90;
-            this.tabControlPanel6.TabIndex = 7;
-            this.tabControlPanel6.TabItem = this.tabItem6;
-            // 
-            // chkPaperWorkPass
-            // 
-            this.chkPaperWorkPass.AutoSize = true;
-            this.chkPaperWorkPass.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.chkPaperWorkPass.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkPaperWorkPass.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkPaperWorkPass.ForeColor = System.Drawing.Color.White;
-            this.chkPaperWorkPass.Location = new System.Drawing.Point(206, 291);
-            this.chkPaperWorkPass.Name = "chkPaperWorkPass";
-            this.chkPaperWorkPass.Size = new System.Drawing.Size(121, 24);
-            this.chkPaperWorkPass.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.chkPaperWorkPass.TabIndex = 164;
-            this.chkPaperWorkPass.Text = "启用证件到期";
-            // 
-            // chkSampleWayCount
-            // 
-            this.chkSampleWayCount.AutoSize = true;
-            this.chkSampleWayCount.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.chkSampleWayCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkSampleWayCount.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkSampleWayCount.ForeColor = System.Drawing.Color.White;
-            this.chkSampleWayCount.Location = new System.Drawing.Point(330, 35);
-            this.chkSampleWayCount.Name = "chkSampleWayCount";
-            this.chkSampleWayCount.Size = new System.Drawing.Size(59, 24);
-            this.chkSampleWayCount.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.chkSampleWayCount.TabIndex = 163;
-            this.chkSampleWayCount.Text = "启用";
-            // 
-            // chkFactoryCount
-            // 
-            this.chkFactoryCount.AutoSize = true;
-            this.chkFactoryCount.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.chkFactoryCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkFactoryCount.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkFactoryCount.ForeColor = System.Drawing.Color.White;
-            this.chkFactoryCount.Location = new System.Drawing.Point(330, 81);
-            this.chkFactoryCount.Name = "chkFactoryCount";
-            this.chkFactoryCount.Size = new System.Drawing.Size(59, 24);
-            this.chkFactoryCount.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.chkFactoryCount.TabIndex = 162;
-            this.chkFactoryCount.Text = "启用";
-            // 
-            // chkTicketDiff
-            // 
-            this.chkTicketDiff.AutoSize = true;
-            this.chkTicketDiff.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.chkTicketDiff.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkTicketDiff.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkTicketDiff.ForeColor = System.Drawing.Color.White;
-            this.chkTicketDiff.Location = new System.Drawing.Point(330, 129);
-            this.chkTicketDiff.Name = "chkTicketDiff";
-            this.chkTicketDiff.Size = new System.Drawing.Size(59, 24);
-            this.chkTicketDiff.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.chkTicketDiff.TabIndex = 161;
-            this.chkTicketDiff.Text = "启用";
-            // 
-            // labelX24
-            // 
-            this.labelX24.AutoSize = true;
-            this.labelX24.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX24.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX24.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelX24.ForeColor = System.Drawing.Color.White;
-            this.labelX24.Location = new System.Drawing.Point(97, 129);
-            this.labelX24.Name = "labelX24";
-            this.labelX24.Size = new System.Drawing.Size(101, 24);
-            this.labelX24.TabIndex = 160;
-            this.labelX24.Text = "净重超差限值";
-            // 
-            // txtTicketDiff
-            // 
-            this.txtTicketDiff.AllowEmptyState = false;
-            this.txtTicketDiff.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
-            // 
-            // 
-            // 
-            this.txtTicketDiff.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.txtTicketDiff.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtTicketDiff.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
-            this.txtTicketDiff.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.txtTicketDiff.ForeColor = System.Drawing.Color.White;
-            this.txtTicketDiff.Increment = 1D;
-            this.txtTicketDiff.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left;
-            this.txtTicketDiff.Location = new System.Drawing.Point(206, 127);
-            this.txtTicketDiff.MaxValue = 1000D;
-            this.txtTicketDiff.MinValue = 0D;
-            this.txtTicketDiff.Name = "txtTicketDiff";
-            this.txtTicketDiff.Size = new System.Drawing.Size(116, 29);
-            this.txtTicketDiff.TabIndex = 159;
-            // 
-            // chkITMS
-            // 
-            this.chkITMS.AutoSize = true;
-            this.chkITMS.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.chkITMS.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkITMS.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkITMS.ForeColor = System.Drawing.Color.White;
-            this.chkITMS.Location = new System.Drawing.Point(206, 256);
-            this.chkITMS.Name = "chkITMS";
-            this.chkITMS.Size = new System.Drawing.Size(121, 24);
-            this.chkITMS.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.chkITMS.TabIndex = 158;
-            this.chkITMS.Text = "启用智能调运";
-            // 
-            // chkAutoPrint
-            // 
-            this.chkAutoPrint.AutoSize = true;
-            this.chkAutoPrint.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.chkAutoPrint.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkAutoPrint.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkAutoPrint.ForeColor = System.Drawing.Color.White;
-            this.chkAutoPrint.Location = new System.Drawing.Point(206, 221);
-            this.chkAutoPrint.Name = "chkAutoPrint";
-            this.chkAutoPrint.Size = new System.Drawing.Size(121, 24);
-            this.chkAutoPrint.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.chkAutoPrint.TabIndex = 157;
-            this.chkAutoPrint.Text = "自动打印磅单";
-            // 
-            // dbiSampleWayCount
-            // 
-            this.dbiSampleWayCount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
-            // 
-            // 
-            // 
-            this.dbiSampleWayCount.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.dbiSampleWayCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.dbiSampleWayCount.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
-            this.dbiSampleWayCount.ForeColor = System.Drawing.Color.White;
-            this.dbiSampleWayCount.Location = new System.Drawing.Point(206, 34);
-            this.dbiSampleWayCount.Name = "dbiSampleWayCount";
-            this.dbiSampleWayCount.ShowUpDown = true;
-            this.dbiSampleWayCount.Size = new System.Drawing.Size(116, 27);
-            this.dbiSampleWayCount.TabIndex = 156;
-            // 
-            // labelX12
-            // 
-            this.labelX12.AutoSize = true;
-            this.labelX12.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX12.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX12.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelX12.ForeColor = System.Drawing.Color.White;
-            this.labelX12.Location = new System.Drawing.Point(102, 35);
-            this.labelX12.Name = "labelX12";
-            this.labelX12.Size = new System.Drawing.Size(101, 24);
-            this.labelX12.TabIndex = 155;
-            this.labelX12.Text = "采样通道车数";
-            // 
-            // dbiFactoryCount
-            // 
-            this.dbiFactoryCount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
-            // 
-            // 
-            // 
-            this.dbiFactoryCount.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.dbiFactoryCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.dbiFactoryCount.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
-            this.dbiFactoryCount.ForeColor = System.Drawing.Color.White;
-            this.dbiFactoryCount.Location = new System.Drawing.Point(206, 80);
-            this.dbiFactoryCount.Name = "dbiFactoryCount";
-            this.dbiFactoryCount.ShowUpDown = true;
-            this.dbiFactoryCount.Size = new System.Drawing.Size(116, 27);
-            this.dbiFactoryCount.TabIndex = 154;
-            // 
-            // labelX13
-            // 
-            this.labelX13.AutoSize = true;
-            this.labelX13.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX13.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX13.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelX13.ForeColor = System.Drawing.Color.White;
-            this.labelX13.Location = new System.Drawing.Point(118, 81);
-            this.labelX13.Name = "labelX13";
-            this.labelX13.Size = new System.Drawing.Size(85, 24);
-            this.labelX13.TabIndex = 153;
-            this.labelX13.Text = "厂内总车数";
-            // 
-            // tabItem6
-            // 
-            this.tabItem6.AttachedControl = this.tabControlPanel6;
-            this.tabItem6.Name = "tabItem6";
-            this.tabItem6.Text = "公共配置";
-            // 
             // tabControlPanel3
             // 
             this.tabControlPanel3.Controls.Add(this.lblVoiceVolume);
@@ -1625,59 +1686,57 @@ namespace CMCS.CarTransport.Queue.Frms
             this.tabItem3.Name = "tabItem3";
             this.tabItem3.Text = "语音设置";
             // 
-            // chkTareCoefficient
+            // chkOutFactoryITMS
             // 
-            this.chkTareCoefficient.AutoSize = true;
-            this.chkTareCoefficient.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.chkTareCoefficient.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkTareCoefficient.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkTareCoefficient.ForeColor = System.Drawing.Color.White;
-            this.chkTareCoefficient.Location = new System.Drawing.Point(330, 179);
-            this.chkTareCoefficient.Name = "chkTareCoefficient";
-            this.chkTareCoefficient.Size = new System.Drawing.Size(59, 24);
-            this.chkTareCoefficient.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.chkTareCoefficient.TabIndex = 167;
-            this.chkTareCoefficient.Text = "启用";
-            // 
-            // labelX26
-            // 
-            this.labelX26.AutoSize = true;
-            this.labelX26.BackColor = System.Drawing.Color.Transparent;
+            this.chkOutFactoryITMS.AutoSize = true;
+            this.chkOutFactoryITMS.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            this.labelX26.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX26.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelX26.ForeColor = System.Drawing.Color.White;
-            this.labelX26.Location = new System.Drawing.Point(97, 179);
-            this.labelX26.Name = "labelX26";
-            this.labelX26.Size = new System.Drawing.Size(101, 24);
-            this.labelX26.TabIndex = 166;
-            this.labelX26.Text = "皮重排查系数";
+            this.chkOutFactoryITMS.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.chkOutFactoryITMS.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkOutFactoryITMS.ForeColor = System.Drawing.Color.White;
+            this.chkOutFactoryITMS.Location = new System.Drawing.Point(206, 327);
+            this.chkOutFactoryITMS.Name = "chkOutFactoryITMS";
+            this.chkOutFactoryITMS.Size = new System.Drawing.Size(121, 24);
+            this.chkOutFactoryITMS.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.chkOutFactoryITMS.TabIndex = 168;
+            this.chkOutFactoryITMS.Text = "启用出厂天线";
             // 
-            // txtTareCoefficient
+            // labelX35
             // 
-            this.txtTareCoefficient.AllowEmptyState = false;
-            this.txtTareCoefficient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
+            this.labelX35.AutoSize = true;
+            this.labelX35.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            this.txtTareCoefficient.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.txtTareCoefficient.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtTareCoefficient.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
-            this.txtTareCoefficient.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.txtTareCoefficient.ForeColor = System.Drawing.Color.White;
-            this.txtTareCoefficient.Increment = 1D;
-            this.txtTareCoefficient.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left;
-            this.txtTareCoefficient.Location = new System.Drawing.Point(206, 177);
-            this.txtTareCoefficient.MaxValue = 1000D;
-            this.txtTareCoefficient.MinValue = 0D;
-            this.txtTareCoefficient.Name = "txtTareCoefficient";
-            this.txtTareCoefficient.Size = new System.Drawing.Size(116, 29);
-            this.txtTareCoefficient.TabIndex = 165;
+            this.labelX35.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX35.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelX35.ForeColor = System.Drawing.Color.White;
+            this.labelX35.Location = new System.Drawing.Point(107, 108);
+            this.labelX35.Name = "labelX35";
+            this.labelX35.Size = new System.Drawing.Size(54, 24);
+            this.labelX35.TabIndex = 53;
+            this.labelX35.Text = "磅编号";
+            // 
+            // intPoundIndex
+            // 
+            this.intPoundIndex.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
+            // 
+            // 
+            // 
+            this.intPoundIndex.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.intPoundIndex.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.intPoundIndex.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.intPoundIndex.ForeColor = System.Drawing.Color.White;
+            this.intPoundIndex.Location = new System.Drawing.Point(166, 107);
+            this.intPoundIndex.MaxValue = 100;
+            this.intPoundIndex.MinValue = 1;
+            this.intPoundIndex.Name = "intPoundIndex";
+            this.intPoundIndex.ShowUpDown = true;
+            this.intPoundIndex.Size = new System.Drawing.Size(90, 27);
+            this.intPoundIndex.TabIndex = 52;
+            this.intPoundIndex.Value = 1;
             // 
             // FrmSetting
             // 
@@ -1689,6 +1748,7 @@ namespace CMCS.CarTransport.Queue.Frms
             this.Controls.Add(this.tableLayoutPanel1);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForeColor = System.Drawing.Color.White;
             this.MaximizeBox = false;
             this.Name = "FrmSetting";
             this.ShowIcon = false;
@@ -1702,6 +1762,14 @@ namespace CMCS.CarTransport.Queue.Frms
             this.panelEx2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).EndInit();
             this.tabControl1.ResumeLayout(false);
+            this.tabControlPanel6.ResumeLayout(false);
+            this.tabControlPanel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTareCoefficient)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTicketDiff)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dbiSampleWayCount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dbiFactoryCount)).EndInit();
+            this.tabControlPanel1.ResumeLayout(false);
+            this.tabControlPanel1.PerformLayout();
             this.tabControlPanel4.ResumeLayout(false);
             this.tabControlPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cmbRwer2Port)).EndInit();
@@ -1714,16 +1782,9 @@ namespace CMCS.CarTransport.Queue.Frms
             ((System.ComponentModel.ISupportInitialize)(this.iptxtLED1IP)).EndInit();
             this.tabControlPanel2.ResumeLayout(false);
             this.tabControlPanel2.PerformLayout();
-            this.tabControlPanel1.ResumeLayout(false);
-            this.tabControlPanel1.PerformLayout();
-            this.tabControlPanel6.ResumeLayout(false);
-            this.tabControlPanel6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTicketDiff)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dbiSampleWayCount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dbiFactoryCount)).EndInit();
             this.tabControlPanel3.ResumeLayout(false);
             this.tabControlPanel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTareCoefficient)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.intPoundIndex)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1823,5 +1884,8 @@ namespace CMCS.CarTransport.Queue.Frms
         private DevComponents.DotNetBar.Controls.CheckBoxX chkTareCoefficient;
         private DevComponents.DotNetBar.LabelX labelX26;
         private DevComponents.Editors.DoubleInput txtTareCoefficient;
+        private DevComponents.DotNetBar.Controls.CheckBoxX chkOutFactoryITMS;
+        private DevComponents.DotNetBar.LabelX labelX35;
+        private DevComponents.Editors.IntegerInput intPoundIndex;
     }
 }

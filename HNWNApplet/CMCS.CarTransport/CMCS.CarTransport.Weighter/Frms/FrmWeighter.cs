@@ -449,6 +449,11 @@ namespace CMCS.CarTransport.Weighter.Frms
         /// </summary>
         int PoundIndex = 1;
 
+        /// <summary>
+        /// 是否启用出厂智能调运
+        /// </summary>
+        bool IsOutFactoryITMS = false;
+
         #endregion
 
         /// <summary>
@@ -1035,6 +1040,7 @@ namespace CMCS.CarTransport.Weighter.Frms
                 this.TicketDiff = (decimal)commonDAO.GetCommonAppletConfigDouble("净重超差限值");
                 this.IsTareCoefficient = commonDAO.GetCommonAppletConfigString("启用皮重排查系数") == "1";
                 this.TareCoefficient = (decimal)commonDAO.GetCommonAppletConfigDouble("皮重排查系数");
+                this.IsOutFactoryITMS = commonDAO.GetCommonAppletConfigString("启用出厂天线") == "1";
 
                 // IO控制器
                 //Hardwarer.Iocer.OnReceived += new IOC.JMDM20DIOV2.JMDM20DIOV2Iocer.ReceivedEventHandler(Iocer_Received);
@@ -1469,6 +1475,7 @@ namespace CMCS.CarTransport.Weighter.Frms
                 this.TicketDiff = (decimal)commonDAO.GetCommonAppletConfigDouble("净重超差限值");
                 this.IsTareCoefficient = commonDAO.GetCommonAppletConfigString("启用皮重排查系数") == "1";
                 this.TareCoefficient = (decimal)commonDAO.GetCommonAppletConfigDouble("皮重排查系数");
+                this.IsOutFactoryITMS = commonDAO.GetCommonAppletConfigString("启用出厂天线") == "1";
             }
             catch (Exception ex)
             {
@@ -1757,7 +1764,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 
                     #region 智能调运
 
-                    if (this.IsITMS)
+                    if (this.IsITMS && !this.IsOutFactoryITMS)
                     {
                         try
                         {
@@ -1846,8 +1853,6 @@ namespace CMCS.CarTransport.Weighter.Frms
             }
             catch (Exception ex)
             {
-                //MessageBoxEx.Show("保存失败\r\n" + ex.Message, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
                 UpdateLedShow("保存失败" + ex.Message);
 
                 Log4Neter.Error("保存运输记录", ex);
@@ -2473,9 +2478,14 @@ namespace CMCS.CarTransport.Weighter.Frms
                     CamareCapturePicture(this.CurrentGoodsTransport.Id);
 
                     //打印磅单 
-                    if (this.AutoPrint && this.CurrentGoodsTransport.SuttleWeight > 0)
+                    if (this.CurrentGoodsTransport.SuttleWeight > 0)
                     {
-                        ReportPrint.GetInstance().PrintGoodsTransport(this.CurrentGoodsTransport);
+                        //异步打印
+                        new Task(() =>
+                        {
+                            try { ReportPrint.GetInstance().PrintGoodsTransport(this.CurrentGoodsTransport); }
+                            catch (Exception ex) { Log4Neter.Error("其他物资打印失败", ex); }
+                        }).Start();
                     }
 
                     return true;

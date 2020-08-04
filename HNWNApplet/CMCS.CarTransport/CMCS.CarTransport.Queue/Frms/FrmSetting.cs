@@ -103,11 +103,13 @@ namespace CMCS.CarTransport.Queue.Frms
             txtAppIdentifier.Text = commonAppConfig.AppIdentifier;
             txtSelfConnStr.Text = commonAppConfig.SelfConnStr;
             chbStartup.Checked = (commonDAO.GetAppletConfigString("开机启动") == "1");
+            intPoundIndex.Value = commonDAO.GetAppletConfigInt32("磅编号");
 
             //公共配置
             chkAutoPrint.Checked = (commonDAO.GetCommonAppletConfigString("自动打印磅单") == "1");
             chkITMS.Checked = (commonDAO.GetCommonAppletConfigString("启用智能调运") == "1");
             chkPaperWorkPass.Checked = (commonDAO.GetCommonAppletConfigString("启用证件到期") == "1");
+            chkOutFactoryITMS.Checked = (commonDAO.GetCommonAppletConfigString("启用出厂天线") == "1");
             dbiSampleWayCount.Value = commonDAO.GetCommonAppletConfigInt32("采样通道车数");
             chkSampleWayCount.Checked = (commonDAO.GetCommonAppletConfigString("启用采样通道车数") == "1");
             dbiFactoryCount.Value = commonDAO.GetCommonAppletConfigInt32("厂内总车数");
@@ -184,10 +186,13 @@ namespace CMCS.CarTransport.Queue.Frms
             }
             catch { }
 
+            commonDAO.SetAppletConfig("磅编号", intPoundIndex.Value.ToString());
+
             //公共配置
             commonDAO.SetCommonAppletConfig("自动打印磅单", Convert.ToInt16(chkAutoPrint.Checked).ToString());
             commonDAO.SetCommonAppletConfig("启用智能调运", Convert.ToInt16(chkITMS.Checked).ToString());
             commonDAO.SetCommonAppletConfig("启用证件到期", Convert.ToInt16(chkPaperWorkPass.Checked).ToString());
+            commonDAO.SetCommonAppletConfig("启用出厂天线", Convert.ToInt16(chkOutFactoryITMS.Checked).ToString());
             commonDAO.SetCommonAppletConfig("采样通道车数", dbiSampleWayCount.Value.ToString());
             commonDAO.SetCommonAppletConfig("启用采样通道车数", Convert.ToInt16(chkSampleWayCount.Checked).ToString());
             commonDAO.SetCommonAppletConfig("厂内总车数", dbiFactoryCount.Value.ToString());

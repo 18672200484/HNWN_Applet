@@ -1195,25 +1195,25 @@ namespace CMCS.CarTransport.Out.Frms
 
             try
             {
-                if (outerDAO.SaveBuyFuelTransport(this.CurrentBuyFuelTransport.Id, DateTime.Now))
-                {
-                    // 打印磅单
-                    // TODO
+                //if (outerDAO.SaveBuyFuelTransport(this.CurrentBuyFuelTransport.Id, DateTime.Now))
+                //{
+                //    // 打印磅单
+                //    // TODO
 
-                    btnSaveTransport_BuyFuel.Enabled = false;
-                    this.CurrentFlowFlag = eFlowFlag.等待离开;
+                //    btnSaveTransport_BuyFuel.Enabled = false;
+                //    this.CurrentFlowFlag = eFlowFlag.等待离开;
 
-                    UpdateLedShow("出厂成功", "请离开");
+                //    UpdateLedShow("出厂成功", "请离开");
 
-                    if (!this.AutoHandMode) MessageBoxEx.Show("出厂成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //    if (!this.AutoHandMode) MessageBoxEx.Show("出厂成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    LoadTodayUnFinishBuyFuelTransport();
-                    LoadTodayFinishBuyFuelTransport();
+                //    LoadTodayUnFinishBuyFuelTransport();
+                //    LoadTodayFinishBuyFuelTransport();
 
-                    LetPass();
+                //    LetPass();
 
-                    return true;
-                }
+                //    return true;
+                //}
             }
             catch (Exception ex)
             {

@@ -63,7 +63,10 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
                 return;
             }
 
-            FrmQueuer.passCarQueuer.Enqueue((ePassWay)(cmbPassWay.SelectedItem as DataItem).Data, txtVoucher.Text.Trim(), true);
+            if ((ePassWay)(cmbPassWay.SelectedItem as DataItem).Data == ePassWay.Way1)
+                FrmQueuer.passCarQueuer.Enqueue((ePassWay)(cmbPassWay.SelectedItem as DataItem).Data, txtVoucher.Text.Trim(), true);
+            else
+                FrmQueuer.passCarQueuerOut.Enqueue((ePassWay)(cmbPassWay.SelectedItem as DataItem).Data, txtVoucher.Text.Trim(), true);
 
             Output("Ä£ÄâÀ´³µ£º" + txtVoucher.Text.Trim() + "  " + cmbPassWay.Text);
         }

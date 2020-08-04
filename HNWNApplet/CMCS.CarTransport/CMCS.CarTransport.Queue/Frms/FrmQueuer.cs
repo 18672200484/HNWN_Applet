@@ -444,6 +444,16 @@ namespace CMCS.CarTransport.Queue.Frms
             set { currentGoodsTransportOut = value; }
         }
 
+        /// <summary>
+        /// 磅编号
+        /// </summary>
+        int PoundIndex = 1;
+
+        /// <summary>
+        /// 是否启用出厂智能调运
+        /// </summary>
+        bool IsOutFactoryITMS = false;
+
         #endregion
 
         #endregion
@@ -529,40 +539,21 @@ namespace CMCS.CarTransport.Queue.Frms
         /// <summary>
         /// 允许通行
         /// </summary>
-        void LetPass()
-        {
-            if (this.CurrentImperfectCar == null) return;
+        //void LetPass()
+        //{
+        //    if (this.CurrentImperfectCar == null) return;
 
-            if (this.CurrentImperfectCar.PassWay == ePassWay.Way1)
-            {
-                this.iocControler.Gate1Up();
-                this.iocControler.GreenLight1();
-            }
-            else if (this.CurrentImperfectCar.PassWay == ePassWay.Way2)
-            {
-                this.iocControler.Gate2Up();
-                this.iocControler.GreenLight2();
-            }
-        }
-
-        /// <summary>
-        /// 阻断前行
-        /// </summary>
-        void LetBlocking()
-        {
-            if (this.CurrentImperfectCar == null) return;
-
-            if (this.CurrentImperfectCar.PassWay == ePassWay.Way1)
-            {
-                this.iocControler.Gate1Down();
-                this.iocControler.RedLight1();
-            }
-            else if (this.CurrentImperfectCar.PassWay == ePassWay.Way2)
-            {
-                this.iocControler.Gate2Down();
-                this.iocControler.RedLight2();
-            }
-        }
+        //    if (this.CurrentImperfectCar.PassWay == ePassWay.Way1)
+        //    {
+        //        this.iocControler.Gate1Up();
+        //        this.iocControler.GreenLight1();
+        //    }
+        //    else if (this.CurrentImperfectCar.PassWay == ePassWay.Way2)
+        //    {
+        //        this.iocControler.Gate2Up();
+        //        this.iocControler.GreenLight2();
+        //    }
+        //}
 
         #endregion
 
@@ -741,6 +732,8 @@ namespace CMCS.CarTransport.Queue.Frms
                 this.isSampleWayCount = (commonDAO.GetCommonAppletConfigString("启用采样通道车数") == "1");
                 this.FactoryCount = commonDAO.GetCommonAppletConfigInt32("厂内总车数");
                 this.isFactoryCount = (commonDAO.GetCommonAppletConfigString("启用厂内总车数") == "1");
+                this.IsOutFactoryITMS = commonDAO.GetCommonAppletConfigString("启用出厂天线") == "1";
+                this.PoundIndex = commonDAO.GetAppletConfigInt32("磅编号");
 
                 // IO控制器
                 //Hardwarer.Iocer.OnReceived += new IOC.JMDM20DIOV2.JMDM20DIOV2Iocer.ReceivedEventHandler(Iocer_Received);
@@ -1002,7 +995,15 @@ namespace CMCS.CarTransport.Queue.Frms
                                 CmcsUnFinishTransport unFinishTransport = carTransportDAO.GetUnFinishTransportByAutotruckId(this.CurrentAutotruck.Id, this.CurrentAutotruck.CarType);
                                 if (unFinishTransport != null)
                                 {
-                                    UpdateLedShow(this.CurrentAutotruck.CarNumber, "已进厂");
+                                    CmcsBuyFuelTransport entity = commonDAO.SelfDber.Get<CmcsBuyFuelTransport>(unFinishTransport.TransportId);
+                                    if (entity != null)
+                                    {
+                                        this.iocControler.Gate1Up();
+                                        this.iocControler.GreenLight1();
+
+                                        UpdateLedShow(this.CurrentAutotruck.CarNumber, "已进厂,请前往" + this.CurrentSampler + "采样机");
+                                    }
+
                                     timer1.Interval = 8000;
                                     this.CurrentFlowFlag = eFlowFlag.异常重置1;
                                     break;
@@ -1518,7 +1519,8 @@ namespace CMCS.CarTransport.Queue.Frms
                     LoadTodayUnFinishBuyFuelTransport();
                     LoadTodayFinishBuyFuelTransport();
 
-                    LetPass();
+                    this.iocControler.Gate1Up();
+                    this.iocControler.GreenLight1();
 
                     return true;
                 }
@@ -2026,7 +2028,8 @@ namespace CMCS.CarTransport.Queue.Frms
                     LoadTodayUnFinishSaleFuelTransport();
                     LoadTodayFinishSaleFuelTransport();
 
-                    LetPass();
+                    this.iocControler.Gate1Up();
+                    this.iocControler.GreenLight1();
 
                     return true;
                 }
@@ -2394,7 +2397,8 @@ namespace CMCS.CarTransport.Queue.Frms
                     LoadTodayUnFinishGoodsTransport();
                     LoadTodayFinishGoodsTransport();
 
-                    LetPass();
+                    this.iocControler.Gate1Up();
+                    this.iocControler.GreenLight1();
 
                     return true;
                 }
@@ -2738,9 +2742,7 @@ namespace CMCS.CarTransport.Queue.Frms
                                         // 自动模式
                                         if (!SaveBuyFuelTransportOut())
                                         {
-                                            UpdateLedShow(this.CurrentAutotruckOut.CarNumber, "保存失败");
-
-                                            timer_Out.Interval = 4000;
+                                            timer_Out.Interval = 8000;
                                         }
                                     }
                                     else
@@ -2874,15 +2876,62 @@ namespace CMCS.CarTransport.Queue.Frms
 
             try
             {
-                if (outerDAO.SaveBuyFuelTransport(this.CurrentBuyFuelTransportOut.Id, DateTime.Now))
+                double deductWeight = 0;
+                string catagory = string.Empty; //卸煤点信息
+
+                if (this.CurrentBuyFuelTransportOut.StepName == eTruckInFactoryStep.轻车.ToString())
                 {
+                    #region 智能调运
+
+                    if (this.IsOutFactoryITMS)
+                    {
+                        try
+                        {
+                            ////测试
+                            //ZkBizResult entity = new ZkBizResult() { DispatchInfo = new DispatchInfo() { ReceiveDeductWeight = 1, Catagory = "000000001" }, Message = "", Status = true };
+                            ZkBizResult entity = commService.GetDeductWeightInfo(this.CurrentAutotruckOut.CarNumber, this.PoundIndex);
+                            if (entity == null)
+                            {
+                                UpdateShowDebug("智能调运读取失败，请联系中矿");
+                                return false;
+                            }
+                            if (!entity.Status)
+                            {
+                                UpdateShowDebug("智能调运读取失败，请联系中矿");
+                                return false;
+                            }
+
+                            deductWeight = entity.DispatchInfo.ReceiveDeductWeight;
+                            catagory = entity.DispatchInfo.Catagory;
+
+                            commService.SetRcvWeight(this.CurrentAutotruckOut.CarNumber, (double)this.CurrentBuyFuelTransportOut.GrossWeight, (double)this.CurrentBuyFuelTransportOut.TareWeight, deductWeight, "", 0, this.PoundIndex);
+                        }
+                        catch (Exception ex)
+                        {
+                            Log4Neter.Error(this.CurrentAutotruckOut.CarNumber + "获取车辆扣吨信息且反馈车辆厂收信息", ex);
+
+                            UpdateShowDebug("智能调运读取失败，请联系管理员");
+                            return false;
+
+                        }
+                    }
+
+                    #endregion
+
+                }
+
+                if (outerDAO.SaveBuyFuelTransport(this.CurrentBuyFuelTransportOut.Id, (decimal)deductWeight, catagory, IsOutFactoryITMS, DateTime.Now))
+                {
+                    this.CurrentBuyFuelTransportOut = commonDAO.SelfDber.Get<CmcsBuyFuelTransport>(this.CurrentBuyFuelTransportOut.Id);
+
                     // 打印磅单
 
                     this.CurrentFlowFlagOut = eFlowFlag.等待离开;
 
                     UpdateShowDebug(this.CurrentAutotruckOut.CarNumber + "出厂成功", "请离开");
 
-                    LetPass();
+                    this.iocControler.Gate2Up();
+                    this.iocControler.GreenLight2();
 
                     //打印磅单 
                     if (this.CurrentBuyFuelTransportOut.SuttleWeight > 0)
@@ -2924,18 +2973,9 @@ namespace CMCS.CarTransport.Queue.Frms
 
                     UpdateShowDebug(this.CurrentAutotruckOut.CarNumber + "出厂成功", "请离开");
 
-                    LetPass();
+                    this.iocControler.Gate2Up();
+                    this.iocControler.GreenLight2();
 
-                    //打印磅单 
-                    if (this.CurrentGoodsTransportOut.SuttleWeight > 0)
-                    {
-                        //异步打印
-                        new Task(() =>
-                        {
-                            try { ReportPrint.GetInstance().PrintGoodsTransport(this.CurrentGoodsTransportOut); }
-                            catch (Exception ex) { Log4Neter.Error("打印失败", ex); }
-                        }).Start();
-                    }
                     return true;
                 }
             }
