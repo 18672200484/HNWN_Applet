@@ -1001,7 +1001,7 @@ namespace CMCS.CarTransport.Queue.Frms
                                         this.iocControler.Gate1Up();
                                         this.iocControler.GreenLight1();
 
-                                        UpdateLedShow(this.CurrentAutotruck.CarNumber, "已进厂,请前往" + this.CurrentSampler + "采样机");
+                                        UpdateLedShow(this.CurrentAutotruck.CarNumber, "已进厂,请前往" + entity.SamplePlace + "采样机");
                                     }
 
                                     timer1.Interval = 8000;
