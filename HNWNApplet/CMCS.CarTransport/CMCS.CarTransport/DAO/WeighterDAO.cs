@@ -116,9 +116,9 @@ namespace CMCS.CarTransport.DAO
                 transport.TareTime = dt;
                 transport.DeductWeight = deductWeight;
 
-                //净重大于票重以票重为准
-                if (transport.GrossWeight - weight > transport.TicketWeight)
-                    transport.TareWeight = transport.GrossWeight - transport.TicketWeight;
+                ////净重大于票重以票重为准
+                //if (transport.GrossWeight - weight > transport.TicketWeight)
+                //    transport.TareWeight = transport.GrossWeight - transport.TicketWeight;
 
                 transport.SuttleWeight = transport.GrossWeight - transport.TareWeight - transport.DeductWeight;
 
