@@ -1741,14 +1741,27 @@ namespace CMCS.CarTransport.Weighter.Frms
                 if (this.CurrentBuyFuelTransport.StepName != eTruckInFactoryStep.重车.ToString())
                 {
                     //重车
-
                     #region 皮重排查系数
                     if (this.IsTareCoefficient && this.CurrentBuyFuelTransport.TicketWeight > 0 && this.CurrentBuyFuelTransport.HistoryTareAvg > 0)
                     {
-                        //超差判断：（过衡毛重 - 历史皮重均值 ）/ 矿发量 > 1.4   或者 矿发量 /（过衡毛重 - 历史皮重均值 ）> 1.4,自动报警；
+                        #region 错误公式
+                        ////超差判断：（过衡毛重 - 历史皮重均值 ）/ 矿发量 > 1.4   或者 矿发量 /（过衡毛重 - 历史皮重均值 ）> 1.4,自动报警；
+                        //decimal TareWeightAvg = this.CurrentBuyFuelTransport.HistoryTareAvg;
+                        //if ((Weight - TareWeightAvg) / this.CurrentBuyFuelTransport.TicketWeight > this.TareCoefficient ||
+                        //     this.CurrentBuyFuelTransport.TicketWeight / (Weight - TareWeightAvg) > this.TareCoefficient)
+                        //{
+                        //    UpdateLedShow(this.CurrentAutotruck.CarNumber + "净重超差");
+                        //    this.voiceSpeaker.Speak(this.CurrentAutotruck.CarNumber + "净重超差", 1, false);
+                        //    return false;
+                        //}
+                        #endregion
+
+                        //（过衡毛重 - 历史皮重均值 -矿发量）/ 矿发量 > 1.4；（过衡毛重 - 历史皮重均值 -矿发量）/ 矿发量 <-1.4；
                         decimal TareWeightAvg = this.CurrentBuyFuelTransport.HistoryTareAvg;
-                        if ((Weight - TareWeightAvg) / this.CurrentBuyFuelTransport.TicketWeight > this.TareCoefficient ||
-                             this.CurrentBuyFuelTransport.TicketWeight / (Weight - TareWeightAvg) > this.TareCoefficient)
+                        isDiff = Math.Abs(Weight - TareWeightAvg - this.CurrentBuyFuelTransport.TicketWeight) / this.CurrentBuyFuelTransport.TicketWeight > this.TareCoefficient;
+                        diffValue = Math.Abs(Weight - TareWeightAvg - this.CurrentBuyFuelTransport.TicketWeight);
+
+                        if (isDiff)
                         {
                             UpdateLedShow(this.CurrentAutotruck.CarNumber + "净重超差");
                             this.voiceSpeaker.Speak(this.CurrentAutotruck.CarNumber + "净重超差", 1, false);
