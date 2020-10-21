@@ -380,7 +380,7 @@ namespace CMCS.DumblyConcealer.Tasks.CarSynchronous
 			}
 			catch (Exception ex)
 			{
-				output("同步供应商信息报错，" + ex.Message, eOutputType.Error);
+                output("同步供应商信息报错，" + ex.Message, eOutputType.Error);
 			}
 			output(string.Format("同步供应商信息{0}条", res), eOutputType.Normal);
 		}
@@ -428,7 +428,7 @@ namespace CMCS.DumblyConcealer.Tasks.CarSynchronous
 			}
 			catch (Exception ex)
 			{
-				output("同步矿点信息报错，" + ex.Message, eOutputType.Error);
+                output("同步矿点信息报错，" + ex.Message, eOutputType.Error);
 			}
 			output(string.Format("同步矿点信息{0}条", res), eOutputType.Normal);
 		}
@@ -633,6 +633,33 @@ namespace CMCS.DumblyConcealer.Tasks.CarSynchronous
 
 			output(string.Format("同步轻车计量反馈{0}条", res), eOutputType.Normal);
 		}
+
+        /// <summary>
+        /// 同步全过程基础信息(更换挂车记录)
+        /// </summary>
+        public void SyncBaseInfoForcCLGLLSPZ(Action<string, eOutputType> output, SqlServerDapperDber sqlDapperDber)
+        {
+            int res = 0;
+
+            try
+            {
+                foreach (View_chlgl_lspz qgc_lspz in sqlDapperDber.Entities<View_chlgl_lspz>())
+                {
+                    if (commonDAO.SelfDber.Get<View_chlgl_lspz>(qgc_lspz.Chlgl_id.ToString()) != null)
+                        commonDAO.SelfDber.Update<View_chlgl_lspz>(qgc_lspz);
+                    else
+                        commonDAO.SelfDber.Insert<View_chlgl_lspz>(qgc_lspz);
+
+                    res++;
+                }
+            }
+            catch (Exception ex)
+            {
+                output("同步更换挂车记录报错，" + ex.Message, eOutputType.Error);
+            }
+
+            output(string.Format("同步更换挂车记录{0}条", res), eOutputType.Normal);
+        }
 
 		#endregion
 
