@@ -14,6 +14,7 @@ using CMCS.Common.Enums;
 using CMCS.Common.Views;
 using CMCS.DapperDber.Dbs.OracleDb;
 using CMCS.DapperDber.Util;
+using CMCS.Common.Entities.Inf;
 
 namespace CMCS.CarTransport.DAO
 {
@@ -271,9 +272,22 @@ namespace CMCS.CarTransport.DAO
         public decimal GetHistoryTareAvg(string carNumber)
         {
             decimal TareWeightAvg = 0;
-            object obj = SelfDber.CreateConnection().ExecuteScalar("select round(avg(t.tareweight),2)  as TareWeightAvg from cmcstbbuyfueltransport t where t.carnumber =:CarNumber and t.tareweight > 0", new { CarNumber = carNumber });
-            if (obj != null)
-                decimal.TryParse(obj.ToString(), out TareWeightAvg);
+
+            View_chlgl_lspz view_chlgl_lspz = SelfDber.Entity<View_chlgl_lspz>("where Chph=:Chph and Is_del='0'", new { Chph = carNumber });
+            if (view_chlgl_lspz != null)
+            {
+                object obj = SelfDber.CreateConnection().ExecuteScalar("select round(avg(t.tareweight),2)  as TareWeightAvg from cmcstbbuyfueltransport t where t.carnumber =:CarNumber and InFactoryTime>=:dt and t.tareweight > 0", new { CarNumber = carNumber, dt = view_chlgl_lspz.Update_date });
+                if (obj != null)
+                    decimal.TryParse(obj.ToString(), out TareWeightAvg);
+                if (TareWeightAvg == 0)
+                    TareWeightAvg = view_chlgl_lspz.Lspz;
+            }
+            else
+            {
+                object obj = SelfDber.CreateConnection().ExecuteScalar("select round(avg(t.tareweight),2)  as TareWeightAvg from cmcstbbuyfueltransport t where t.carnumber =:CarNumber and t.tareweight > 0", new { CarNumber = carNumber });
+                if (obj != null)
+                    decimal.TryParse(obj.ToString(), out TareWeightAvg);
+            }
 
             return TareWeightAvg;
         }
